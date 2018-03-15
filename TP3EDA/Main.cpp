@@ -1,11 +1,11 @@
 #include "main.h"
 #include "Floor.h"
 #include "Robot.h"
-
+#include "parseCmdLine.h"
 
 bool resourcesLoaded(bool * array, int size);
 
-int main()
+int main(int argc, char *argv[])
 {
 #ifdef DISPLAY_C
 	ALLEGRO_DISPLAY * display = NULL;

@@ -83,6 +83,8 @@ bool Floor::isItClean()
 	return retValue;
 }
 
+
+
 void Floor::draw()
 {
 	for (int i = 0; (i < this->row); ++i)

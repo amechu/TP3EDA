@@ -9,7 +9,7 @@
 class Robot
 {
 public:
-	Robot(char * pathBitmap);
+	Robot();
 	~Robot();
 	float getXPos();
 	float getYPos();
@@ -17,6 +17,8 @@ public:
 	void update();
 	void correctPosition();
 	void draw();
+	bool loadBitmap(char * pathBitmap);
+
 private:
 	float x;
 	float y;

@@ -2,19 +2,30 @@
 
 
 
-Robot::Robot(char * pathBitmap)
+Robot::Robot()
 {
 	this->x = rand() % (al_get_display_width(al_get_current_display()));
 	this->y = rand() % (al_get_display_height(al_get_current_display()));
 	this->updateAngle();
 
-	this->bitmap = al_load_bitmap(pathBitmap);  // Hay que ponerlo lindo
 }
 
 
 Robot::~Robot()
 {
 	al_destroy_bitmap(this->bitmap);
+}
+
+bool Robot::loadBitmap(char * pathBitmap)
+{
+	bool retValue;
+
+	if (this->bitmap = al_load_bitmap(pathBitmap))
+		retValue = true;
+	else
+		retValue = false;
+
+		return retValue;
 }
 
 float Robot::getXPos()

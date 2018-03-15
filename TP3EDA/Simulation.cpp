@@ -2,13 +2,20 @@
 
 
 
+
 Simulation::Simulation(int ammountRobots_, int row_, int col_, char * pathDirtyBitmap, char * pathCleanBitmap, char * pathRobotBitmap)
 {
 	this->ground = new Floor(row_, col_, pathCleanBitmap, pathDirtyBitmap);
-	this->bots = new Robot[ammountRobots_](pathRobotBitmap);
+	this->bots = new Robot[ammountRobots_];
 	this->ticks = 0;
 	this->ammountBots = ammountRobots_;
 	this->ground->litterAll();
+
+	bool load = true;
+
+	for (int i = 0; (i < ammountRobots_) && (load); ++i)	// Hay que ver como salgo de aca. El constructor no puede devolver datos creo
+		if (!this->bots[i].loadBitmap(pathRobotBitmap))
+			load = false;
 }
 
 
