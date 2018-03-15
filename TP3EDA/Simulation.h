@@ -5,11 +5,12 @@
 class Simulation
 {
 public:
-	Simulation(int ammountRobots_, int row_, int col_);
+	Simulation(int ammountRobots_, int row_, int col_, char * pathDirtyBitmap, char * pathCleanBitmap, char * pathRobotBitmap);
 	~Simulation();
 	int run();
 	void cycle();
 	void draw();
+	bool checkCrash(int robotNumber);
 
 private:
 	Robot * bots;

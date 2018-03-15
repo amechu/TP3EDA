@@ -23,6 +23,7 @@ int main()
 	ALLEGRO_SAMPLE * song = NULL;
 #endif
 
+	srand(time(NULL));
 
 	bool keep = true;
 

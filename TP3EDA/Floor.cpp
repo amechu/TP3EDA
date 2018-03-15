@@ -2,17 +2,22 @@
 
 
 
-Floor::Floor(int row_, int col_)
+Floor::Floor(int row_, int col_,char * pathCleanBitmap, char * pathDirtyBitmap)
 {
 	this->row = row_;
 	this->col = col_;
 	this->tiles = new bool[row_ * col_];
+	
+	this->cleanBitmap = al_load_bitmap(pathCleanBitmap);  // Hay que ponerlo lindo
+	this->dirtyBitmap = al_load_bitmap(pathDirtyBitmap);  // Hay que ponerlo lindo
 }
 
 
 Floor::~Floor()
 {
 	delete[] this->tiles;
+	al_destroy_bitmap(this->cleanBitmap);
+	al_destroy_bitmap(this->dirtyBitmap);
 }
 
 void Floor::cleanAll()
@@ -88,7 +93,7 @@ void Floor::draw()
 				al_draw_bitmap(this->dirtyBitmap, a * UNIT, i * UNIT, 0);
 }
 
-int Floor::getColNumbre()
+int Floor::getColNumber()
 {
 	return this->col;
 }

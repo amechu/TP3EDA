@@ -2,13 +2,13 @@
 
 
 
-Robot::Robot()
+Robot::Robot(char * pathBitmap)
 {
 	this->x = rand() % (al_get_display_width(al_get_current_display()));
 	this->y = rand() % (al_get_display_height(al_get_current_display()));
 	this->updateAngle();
 
-	this->bitmap = al_load_bitmap("");
+	this->bitmap = al_load_bitmap(pathBitmap);  // Hay que ponerlo lindo
 }
 
 
@@ -36,6 +36,12 @@ void Robot::update()
 {
 	this->x += cos(this->angle) * UNIT;
 	this->y += sin(this->angle) * UNIT;
+}
+
+void Robot::correctPosition()
+{
+	this->x -= cos(this->angle) * UNIT;
+	this->y -= sin(this->angle) * UNIT;
 	this->updateAngle();
 }
 

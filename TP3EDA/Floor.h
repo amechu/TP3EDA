@@ -6,7 +6,7 @@
 class Floor
 {
 public:
-	Floor( int row_,  int col_);
+	Floor( int row_,  int col_,char * pathCleanBitmap, char * pathDirtyBitmap);
 	~Floor();
 	void cleanAll();
 	void litterAll();
@@ -14,7 +14,7 @@ public:
 	void litterTile(float x, float y);
 	bool isItClean();
 	void draw();
-	int getColNumbre();
+	int getColNumber();
 	int getRowNumber();
 
 private:

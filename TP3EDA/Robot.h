@@ -9,12 +9,13 @@
 class Robot
 {
 public:
-	Robot();
+	Robot(char * pathBitmap);
 	~Robot();
 	float getXPos();
 	float getYPos();
 	void updateAngle();
 	void update();
+	void correctPosition();
 	void draw();
 private:
 	float x;
