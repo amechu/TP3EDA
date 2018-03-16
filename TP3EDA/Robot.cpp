@@ -6,7 +6,7 @@ Robot::Robot()
 {
 	this->x = rand() % (al_get_display_width(al_get_current_display()));
 	this->y = rand() % (al_get_display_height(al_get_current_display()));
-	this->updateAngle();
+	this->updateDirection();
 
 }
 
@@ -38,7 +38,7 @@ float Robot::getYPos()
 	return this->y;
 }
 
-void Robot::updateAngle()
+void Robot::updateDirection()
 {
 	this->angle = (rand() % 360) * M_PI / 180.0; // Dice que el angulo tiene que ser un numbero real, alguna idea?
 }
@@ -53,7 +53,7 @@ void Robot::correctPosition(float unit)
 {
 	this->x -= cos(this->angle) * unit;
 	this->y -= sin(this->angle) * unit;
-	this->updateAngle();
+	this->updateDirection();
 }
 
 void Robot::draw()

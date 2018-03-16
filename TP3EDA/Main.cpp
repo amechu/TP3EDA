@@ -136,11 +136,11 @@ int main(int argc, char *argv[])
 			break;
 		default:
 			if (information.mode == MODEONE)
-			{// No se que carajo pasa aca
+			{
 				Simulation room(information.bots, information.row, information.col, (char *) DIRTYTILEBITMAP, (char *)CLEANTILEBITMAP, (char *)ROBOTBITMAP);
 				while (!room.cycle())
 				{
-					room.draw();	// Hay que ver que onda con el scaled bitmap
+					room.draw();
 					ticks++;
 					al_rest(0.05);
 				}
