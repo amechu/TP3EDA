@@ -8,14 +8,14 @@
 //#define AUDIO_C
 //#define KEYBOARD_C
 //#define MOUSE_C
-//#define IMAGE_C
+#define IMAGE_C
 //#define EVENT_C
 #define TIMER_C
 #define DISPLAY_C
 
 // Important Display Constants
-#define DISPLAYW (1000)
-#define DISPLAYH (2000)
+#define DISPLAYW (500)
+#define DISPLAYH (500)
 
 // Important Timer Constants
 #define REFRESHRATE (60.0)

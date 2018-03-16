@@ -2,12 +2,12 @@
 
 
 
-Floor::Floor(int row_, int col_,char * pathCleanBitmap, char * pathDirtyBitmap)
+Floor::Floor(int row_, int col_, const char * pathCleanBitmap, const char * pathDirtyBitmap, float unit_)
 {
 	this->row = row_;
 	this->col = col_;
 	this->tiles = new bool[row_ * col_];
-	
+	this->unit = unit_;
 	this->cleanBitmap = al_load_bitmap(pathCleanBitmap);  // Hay que ponerlo lindo
 	this->dirtyBitmap = al_load_bitmap(pathDirtyBitmap);  // Hay que ponerlo lindo
 }
@@ -39,13 +39,13 @@ void Floor::cleanTile(float x, float y)
 	int xTile = -1,yTile = -1;
 	for (int i = 0; i < this->col; ++i)
 	{
-		if ((i * UNIT <= x) && ((i + 1)* UNIT > x))
+		if ((i * this->unit <= x) && ((i + 1)* this->unit > x))
 			xTile = i;
 	}
 
 	for (int i = 0; i < this->row; ++i)
 	{
-		if ((i * UNIT <= y) && ((i + 1)* UNIT > y))
+		if ((i * this->unit <= y) && ((i + 1)* this->unit > y))
 			yTile = i;
 	}
 
@@ -58,13 +58,13 @@ void Floor::litterTile(float x, float y)
 	int xTile = -1, yTile = -1;
 	for (int i = 0; i < this->col; ++i)
 	{
-		if ((i * UNIT < x) && ((i + 1)* UNIT > x))
+		if ((i * this->unit < x) && ((i + 1)* this->unit >x))
 			xTile = i;
 	}
 
 	for (int i = 0; i < this->row; ++i)
 	{
-		if ((i * UNIT < y) && ((i + 1)* UNIT > y))
+		if ((i * this->unit < y) && ((i + 1)* this->unit > y))
 			yTile = i;
 	}
 
@@ -87,12 +87,16 @@ bool Floor::isItClean()
 
 void Floor::draw()
 {
+	float finalWidth = al_get_display_width(al_get_current_display()) / (float)this->col;
+	float finalHeight = al_get_display_height(al_get_current_display()) / (float)this->row;
+	float currentWidth = al_get_bitmap_width(this->cleanBitmap);
+	float currentHeight = al_get_bitmap_height(this->cleanBitmap);
 	for (int i = 0; (i < this->row); ++i)
 		for (int a = 0; (a < this->col); ++a)
 			if (this->tiles[i + a])
-				al_draw_bitmap(this->cleanBitmap, a * UNIT, i * UNIT, 0);
+				al_draw_scaled_bitmap(this->cleanBitmap, a * this->unit, i * this->unit, currentWidth, currentHeight, a * this->unit, i * this->unit, finalWidth, finalHeight, 0);
 			else
-				al_draw_bitmap(this->dirtyBitmap, a * UNIT, i * UNIT, 0);
+				al_draw_scaled_bitmap(this->dirtyBitmap, a * this->unit, i * this->unit, currentWidth, currentHeight, a * this->unit, i * this->unit, finalWidth, finalHeight, 0);
 }
 
 int Floor::getColNumber()

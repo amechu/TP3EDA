@@ -137,10 +137,10 @@ int main(int argc, char *argv[])
 		default:
 			if (information.mode == MODEONE)
 			{// No se que carajo pasa aca
-				Simulation room(information.bots, information.row, information.col, DIRTYTILEBITMAP, CLEANTILEBITMAP, ROBOTBITMAP);
+				Simulation room(information.bots, information.row, information.col, (char *) DIRTYTILEBITMAP, (char *)CLEANTILEBITMAP, (char *)ROBOTBITMAP);
 				while (!room.cycle())
 				{
-					room.draw();
+					room.draw();	// Hay que ver que onda con el scaled bitmap
 					ticks++;
 					al_rest(1);
 				}

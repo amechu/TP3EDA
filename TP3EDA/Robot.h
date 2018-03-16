@@ -4,7 +4,6 @@
 #include <stdlib.h>
 
 #define M_PI (3.14159265358979323846264338327950288)
-#define UNIT 10
 
 class Robot
 {
@@ -14,10 +13,10 @@ public:
 	float getXPos();
 	float getYPos();
 	void updateAngle();
-	void update();
-	void correctPosition();
+	void update(float unit);
+	void correctPosition(float unit);
 	void draw();
-	bool loadBitmap(char * pathBitmap);
+	bool loadBitmap(const char * pathBitmap);
 
 private:
 	float x;

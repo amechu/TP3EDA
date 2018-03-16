@@ -29,7 +29,7 @@ int fillInformation(char * pass, char * value, void * userData)
 		else if ((!usr->mode) && !strcmp(_strlwr((char *)pass), "mode"))
 		{
 			usr->mode = atoi(value);
-			if ((usr->mode != MODEONE) || (usr->mode != MODETWO))
+			if ((usr->mode != MODEONE) && (usr->mode != MODETWO))
 				retValue = ERRORTYPE3;
 		}
 		else
