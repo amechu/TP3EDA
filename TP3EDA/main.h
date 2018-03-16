@@ -10,7 +10,7 @@
 //#define MOUSE_C
 #define IMAGE_C
 //#define EVENT_C
-#define TIMER_C
+//#define TIMER_C
 #define DISPLAY_C
 
 // Important Display Constants
@@ -43,7 +43,6 @@
 #include <allegro5\allegro_image.h>
 #endif
 
-// Important Event Constants
 
 
 enum initsAndInstalls

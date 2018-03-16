@@ -120,12 +120,14 @@ int main(int argc, char *argv[])
 		al_register_event_source(eventQueue, al_get_keyboard_event_source());
 #endif
 #endif
-
+#ifdef TIMER_C
 		al_start_timer(timer);
-
+#endif
 #ifdef AUDIO_C
 		al_play_sample(song, VOLUME, 0, SONGSPEED, ALLEGRO_PLAYMODE_LOOP, NULL);
 #endif
+
+// Aca empieza la parte importante del main
 		switch (parseCmdLine(argc, argv, &fillInformation, &information))
 		{
 		case ERRORTYPE1:
@@ -138,19 +140,22 @@ int main(int argc, char *argv[])
 			if (information.mode == MODEONE)
 			{
 				Simulation room(information.bots, information.row, information.col, (char *) DIRTYTILEBITMAP, (char *)CLEANTILEBITMAP, (char *)ROBOTBITMAP);
-				while (!room.cycle())
-				{
+				// Este while loop es el modo 1. La funcion cycle realiza un ciclo de la simulacion, si sigue habiendo baldosas sucias, va a devolver 'false'
+				// y el loop entra a dibujarlo en pantalla, suma 1 a la cantidad de ticks y espera un tiempo determinado
+				do{
 					room.draw();
 					ticks++;
 					al_rest(0.05);
-				}
+				} while (!room.cycle());
 			}
 			else if (information.mode == MODETWO)
 			{
 				double ticksMedio[MAXROBOTS];
-
-
-				for(int i = 0;  (i<MAXROBOTS) && (ticksMedio[i] - ticksMedio[i - 1] >0.1); ++i)
+				
+				// Este es el modo 2, donde se ejecuta la simulacion sin parte grafica de forma que por cada cantidad de robots se ejecutan 1000 simulaciones 
+				// y se realiza un promedio de la cantidad de la cantidad de ticks que tardan cada una. Esto nos va a permitir hacer un grafico de barras al final
+				// y se va a poder ver que cantidad de robots es ideal para limpiar el piso
+				for(int i = 1;  (i<MAXROBOTS) && (ticksMedio[i] - ticksMedio[i - 1] >0.1); ++i)
 				{
 					double ticksSum = 0.0;
 
@@ -165,6 +170,7 @@ int main(int argc, char *argv[])
 				}
 			}
 		}
+// Aca termina la parte importante del main
 
 
 	}
