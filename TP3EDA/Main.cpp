@@ -1,7 +1,15 @@
 #include "main.h"
 #include "Floor.h"
 #include "Robot.h"
+#include "Simulation.h"
 #include "parseCmdLine.h"
+#include "callback.h"
+
+#define MAXROBOTS (500)
+#define DIRTYTILEBITMAP ""
+#define CLEANTILEBITMAP ""
+#define ROBOTBITMAP ""
+
 
 bool resourcesLoaded(bool * array, int size);
 
@@ -22,7 +30,8 @@ int main(int argc, char *argv[])
 #ifdef AUDIO_C
 	ALLEGRO_SAMPLE * song = NULL;
 #endif
-
+	usrInput information;
+	int ticks = 0;
 	srand(time(NULL));
 
 	bool keep = true;
@@ -116,7 +125,45 @@ int main(int argc, char *argv[])
 #ifdef AUDIO_C
 		al_play_sample(song, VOLUME, 0, SONGSPEED, ALLEGRO_PLAYMODE_LOOP, NULL);
 #endif
+		switch (parseCmdLine(argc, argv, &fillInformation, &information))
+		{
+		case ERRORTYPE1:
+			break;
+		case ERRORTYPE2:
+			break;
+		case ERRORTYPE3:
+			break;
+		default:
+			if (information.mode == MODEONE)
+			{// No se que carajo pasa aca
+				Simulation room(information.bots, information.row, information.col, DIRTYTILEBITMAP, CLEANTILEBITMAP, ROBOTBITMAP);
+				while (!room.cycle())
+				{
+					room.draw();
+					ticks++;
+					al_rest(1);
+				}
+			}
+			else if (information.mode == MODETWO)
+			{
+				double ticksMedio[MAXROBOTS];
 
+
+				for(int i = 0;  (i<MAXROBOTS) && (ticksMedio[i] - ticksMedio[i - 1] >0.1); ++i)
+				{
+					double ticksSum = 0.0;
+
+					for(int a = 0; a < 1000; ++a)
+					{
+						Simulation room(i, information.row, information.col, DIRTYTILEBITMAP, CLEANTILEBITMAP, ROBOTBITMAP);
+						ticksSum += room.run();
+					}
+					ticksMedio[i] = ticksSum / 1000.0;
+
+					// Hacer Grafico de barras
+				}
+			}
+		}
 
 
 	}

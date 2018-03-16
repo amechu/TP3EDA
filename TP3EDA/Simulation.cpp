@@ -3,7 +3,7 @@
 
 
 
-Simulation::Simulation(int ammountRobots_, int row_, int col_, char * pathDirtyBitmap, char * pathCleanBitmap, char * pathRobotBitmap)
+Simulation::Simulation(int ammountRobots_, int row_, int col_,  char * pathDirtyBitmap,  char * pathCleanBitmap,  char * pathRobotBitmap)
 {
 	this->ground = new Floor(row_, col_, pathCleanBitmap, pathDirtyBitmap);
 	this->bots = new Robot[ammountRobots_];
@@ -28,15 +28,14 @@ Simulation::~Simulation()
 int Simulation::run()
 {
 	
-	while (!this->ground->isItClean())
+	while (!this->cycle())
 	{
-		this->cycle();
 		this->ticks++;
 	}
 	return this->ticks;
 }
 
-void Simulation::cycle()
+bool Simulation::cycle()
 {
 	for (int i = 0; i < this->ammountBots; ++i)
 	{
@@ -46,6 +45,7 @@ void Simulation::cycle()
 		if (this->checkCrash(i))
 			this->bots[i].correctPosition();
 	}
+	return this->ground->isItClean();
 }
 
 void Simulation::draw()

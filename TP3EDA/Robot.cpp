@@ -40,7 +40,7 @@ float Robot::getYPos()
 
 void Robot::updateAngle()
 {
-	this->angle = (rand() % 361) * M_PI / 180;
+	this->angle = (rand() % 360) * M_PI / 180.0; // Dice que el angulo tiene que ser un numbero real, alguna idea?
 }
 
 void Robot::update()

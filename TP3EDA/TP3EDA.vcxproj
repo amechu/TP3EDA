@@ -118,6 +118,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="callback.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="parseCmdLine.cpp" />
@@ -125,6 +126,7 @@
     <ClCompile Include="Simulation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="callback.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="parseCmdLine.h" />

@@ -39,13 +39,13 @@ void Floor::cleanTile(float x, float y)
 	int xTile = -1,yTile = -1;
 	for (int i = 0; i < this->col; ++i)
 	{
-		if ((i * UNIT < x) && ((i + 1)* UNIT > x))
+		if ((i * UNIT <= x) && ((i + 1)* UNIT > x))
 			xTile = i;
 	}
 
 	for (int i = 0; i < this->row; ++i)
 	{
-		if ((i * UNIT < y) && ((i + 1)* UNIT > y))
+		if ((i * UNIT <= y) && ((i + 1)* UNIT > y))
 			yTile = i;
 	}
 

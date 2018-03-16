@@ -8,7 +8,7 @@ public:
 	Simulation(int ammountRobots_, int row_, int col_, char * pathDirtyBitmap, char * pathCleanBitmap, char * pathRobotBitmap);
 	~Simulation();
 	int run();
-	void cycle();
+	bool cycle();
 	void draw();
 	bool checkCrash(int robotNumber);
 
