@@ -58,6 +58,7 @@ bool Simulation::cycle()
 
 void Simulation::draw()
 {
+	al_clear_to_color(al_color_name("black"));
 	this->ground->draw();
 	for (int i = 0; i < this->ammountBots; ++i)
 		this->bots[i].draw();
@@ -68,9 +69,9 @@ bool Simulation::checkCrash(int robotNumber)
 {
 	bool crash = false;
 
-	if ((this->bots[robotNumber].getXPos() <= 0) || this->bots[robotNumber].getXPos() >= (this->ground->getRowNumber() * this->unit))
+	if ((this->bots[robotNumber].getXPos() <= 0) || this->bots[robotNumber].getXPos() >= (al_get_display_width(al_get_current_display())))
 		crash = true;
-	if ((this->bots[robotNumber].getYPos() <= 0) || this->bots[robotNumber].getXPos() >= (this->ground->getColNumber() * this->unit))
+	if ((this->bots[robotNumber].getYPos() <= 0) || this->bots[robotNumber].getXPos() >= (al_get_display_height(al_get_current_display())))
 		crash = true;
 
 	return crash;

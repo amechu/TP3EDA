@@ -142,7 +142,7 @@ int main(int argc, char *argv[])
 				{
 					room.draw();	// Hay que ver que onda con el scaled bitmap
 					ticks++;
-					al_rest(1);
+					al_rest(0.05);
 				}
 			}
 			else if (information.mode == MODETWO)

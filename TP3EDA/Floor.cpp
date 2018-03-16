@@ -49,7 +49,7 @@ void Floor::cleanTile(float x, float y)
 			yTile = i;
 	}
 
-	if (xTile > 0 && yTile > 0)
+	if (xTile > 0 && yTile > 0)//>=0
 		this->tiles[yTile * this->col + xTile] = true;
 }
 
@@ -94,9 +94,9 @@ void Floor::draw()
 	for (int i = 0; (i < this->row); ++i)
 		for (int a = 0; (a < this->col); ++a)
 			if (this->tiles[i + a])
-				al_draw_scaled_bitmap(this->cleanBitmap, a * this->unit, i * this->unit, currentWidth, currentHeight, a * this->unit, i * this->unit, finalWidth, finalHeight, 0);
+				al_draw_scaled_bitmap(this->cleanBitmap, 0, 0, currentWidth, currentHeight, a * this->unit, i * this->unit, finalWidth, finalHeight, 0);
 			else
-				al_draw_scaled_bitmap(this->dirtyBitmap, a * this->unit, i * this->unit, currentWidth, currentHeight, a * this->unit, i * this->unit, finalWidth, finalHeight, 0);
+				al_draw_scaled_bitmap(this->dirtyBitmap, 0, 0, currentWidth, currentHeight, a * this->unit, i * this->unit, finalWidth, finalHeight, 0);
 }
 
 int Floor::getColNumber()

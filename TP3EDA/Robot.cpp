@@ -58,6 +58,5 @@ void Robot::correctPosition(float unit)
 
 void Robot::draw()
 {
-	al_draw_scaled_bitmap(this->bitmap, this->x, this->y, al_get_bitmap_width(this->bitmap), al_get_bitmap_height(this->bitmap), this->x, this->y, 100.0, 100.0, 0);
-	al_draw_bitmap(this->bitmap, this->x, this->y, 0);
+	al_draw_scaled_bitmap(this->bitmap,0, 0, al_get_bitmap_width(this->bitmap), al_get_bitmap_height(this->bitmap), this->x, this->y, 100.0, 100.0, 0);
 }

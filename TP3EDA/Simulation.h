@@ -1,6 +1,7 @@
 #pragma once
 #include "Robot.h"
 #include "Floor.h"
+#include <allegro5\allegro_color.h>
 
 class Simulation
 {
