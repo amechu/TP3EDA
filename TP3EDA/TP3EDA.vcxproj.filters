@@ -57,4 +57,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="captainShield.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="CleanTile.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="DirtyTile.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

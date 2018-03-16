@@ -5,10 +5,11 @@
 #include "parseCmdLine.h"
 #include "callback.h"
 
+
 #define MAXROBOTS (500)
-#define DIRTYTILEBITMAP ""
-#define CLEANTILEBITMAP ""
-#define ROBOTBITMAP ""
+#define DIRTYTILEBITMAP "DirtyTile.png"
+#define CLEANTILEBITMAP "CleanTile.png"
+#define ROBOTBITMAP "captainShield.png"
 
 
 bool resourcesLoaded(bool * array, int size);
