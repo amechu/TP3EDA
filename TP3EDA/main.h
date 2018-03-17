@@ -5,7 +5,7 @@
 // Important compiling stuff
 
 //#define FONT_C
-//#define AUDIO_C
+#define AUDIO_C
 //#define KEYBOARD_C
 //#define MOUSE_C
 #define IMAGE_C
@@ -14,8 +14,8 @@
 #define DISPLAY_C
 
 // Important Display Constants
-#define DISPLAYW (1000)
-#define DISPLAYH (1000)
+#define DISPLAYW (1500)
+#define DISPLAYH (1500)
 
 // Important Timer Constants
 #define REFRESHRATE (60.0)
@@ -32,7 +32,7 @@
 #ifdef AUDIO_C
 #include <allegro5\allegro_acodec.h>
 #include <allegro5\allegro_audio.h>
-#define SONGPATH "path"
+#define SONGPATH "AvengersInfinityWarMusic.ogg"
 #define NUMBEROFSAMPLES (1)
 #define VOLUME (1.0)
 #define SONGSPEED (1.0)

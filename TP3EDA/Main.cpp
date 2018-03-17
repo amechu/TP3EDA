@@ -147,7 +147,7 @@ int main(int argc, char *argv[])
 				do{
 					room.draw();
 					ticks++;
-					al_rest(0.3);
+					al_rest(0.03);
 				} while (!room.cycle());
 			}
 			else if (information.mode == MODETWO)
@@ -207,6 +207,7 @@ int main(int argc, char *argv[])
 	if (initResources[TIMER])
 		al_destroy_timer(timer);
 #endif
+
 #ifdef DISPLAY_C
 	if (initResources[DISPLAY])
 	{
