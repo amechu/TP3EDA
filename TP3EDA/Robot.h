@@ -25,7 +25,7 @@ public:
 	// Esta funcion dibuja al robot
 	void draw();
 	// Esta funcion carga la imagen al bitmap. Es necesaria para poder dibujar!
-	bool loadBitmap(const char * pathBitmap);
+	bool loadExternalInfo(const char * pathBitmap, float radius_);
 	float getRadius();
 private:
 	float radius;

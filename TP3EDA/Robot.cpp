@@ -4,25 +4,38 @@
 
 Robot::Robot()
 {
-	radius = 50;
-
-	this->x = radius + rand() % (int)(al_get_display_width(al_get_current_display()) - radius);
-	this->y = radius + rand() % (int)(al_get_display_height(al_get_current_display()) - radius);
+	this->x = rand() % (int)(al_get_display_width(al_get_current_display()));
+	this->y = rand() % (int)(al_get_display_height(al_get_current_display()));
 	this->updateDirection();
-
-	radius = 50;
 
 }
 
-
+ 
 Robot::~Robot()
 {
 	al_destroy_bitmap(this->bitmap);
 }
 
-bool Robot::loadBitmap(const char * pathBitmap)
+bool Robot::loadExternalInfo(const char * pathBitmap,float radius_)
 {
 	bool retValue;
+	this->radius = radius_;
+	float displayW = al_get_display_width(al_get_current_display());
+	float displayH = al_get_display_height(al_get_current_display());
+
+	if ((this->x > this->radius) && (this->x < displayW - (this->radius * 2)))
+		this->x += radius;
+
+	if ((this->x > displayW - this->radius) && (this->x < displayW))
+		this->x -= this->radius;
+
+	if ((this->y > this->radius) && (this->y < displayH - (this->radius * 2)))
+		this->y += radius;
+
+	if ((this->y > displayH - this->radius) && (this->y < displayH))
+		this->y -= this->radius;
+
+
 
 	if (this->bitmap = al_load_bitmap(pathBitmap))
 		retValue = true;
@@ -62,8 +75,6 @@ void Robot::update(float unit)
 
 void Robot::correctPosition(float unit)
 {
-	//this->x -= cos(this->angle) * unit;
-	//this->y -= sin(this->angle) * unit;
 	this->x = this->oldX;
 	this->y = this->oldY;
 	this->updateDirection();
@@ -71,5 +82,5 @@ void Robot::correctPosition(float unit)
 
 void Robot::draw()
 {
-	al_draw_scaled_bitmap(this->bitmap,0, 0, al_get_bitmap_width(this->bitmap), al_get_bitmap_height(this->bitmap), this->x - this->radius, this->y - this->radius, 100.0, 100.0, 0);
+	al_draw_scaled_bitmap(this->bitmap,0, 0, al_get_bitmap_width(this->bitmap), al_get_bitmap_height(this->bitmap), this->x - this->radius, this->y - this->radius, radius * 2, radius * 2, 0);
 }

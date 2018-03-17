@@ -13,6 +13,7 @@
 
 
 bool resourcesLoaded(bool * array, int size);
+void loadArray(double * arr, int size, double value);
 
 int main(int argc, char *argv[])
 {
@@ -32,7 +33,7 @@ int main(int argc, char *argv[])
 	ALLEGRO_SAMPLE * song = NULL;
 #endif
 	usrInput information;
-	int ticks = 0;
+	
 	srand(time(NULL));
 
 	bool keep = true;
@@ -139,32 +140,34 @@ int main(int argc, char *argv[])
 		default:
 			if (information.mode == MODEONE)
 			{
+				int ticks = 0;
 				Simulation room(information.bots, information.row, information.col, (char *) DIRTYTILEBITMAP, (char *)CLEANTILEBITMAP, (char *)ROBOTBITMAP);
 				// Este while loop es el modo 1. La funcion cycle realiza un ciclo de la simulacion, si sigue habiendo baldosas sucias, va a devolver 'false'
 				// y el loop entra a dibujarlo en pantalla, suma 1 a la cantidad de ticks y espera un tiempo determinado
 				do{
 					room.draw();
 					ticks++;
-					al_rest(0.7);
+					al_rest(0.3);
 				} while (!room.cycle());
 			}
 			else if (information.mode == MODETWO)
 			{
 				double ticksMedio[MAXROBOTS];
-				
+				loadArray(ticksMedio, MAXROBOTS, 9999999999999);
 				// Este es el modo 2, donde se ejecuta la simulacion sin parte grafica de forma que por cada cantidad de robots se ejecutan 1000 simulaciones 
 				// y se realiza un promedio de la cantidad de la cantidad de ticks que tardan cada una. Esto nos va a permitir hacer un grafico de barras al final
 				// y se va a poder ver que cantidad de robots es ideal para limpiar el piso
-				for(int i = 1;  (i<MAXROBOTS) && (ticksMedio[i] - ticksMedio[i - 1] >0.1); ++i)
+				
+				for(int i = 1;  (i<MAXROBOTS) && (i == 1 ? true : (ticksMedio[i] - ticksMedio[i - 1] >0.1)); ++i)
 				{
 					double ticksSum = 0.0;
 
-					for(int a = 0; a < 1000; ++a)
+					for(int a = 0; a < 10; ++a)
 					{
 						Simulation room(i, information.row, information.col, DIRTYTILEBITMAP, CLEANTILEBITMAP, ROBOTBITMAP);
 						ticksSum += room.run();
 					}
-					ticksMedio[i] = ticksSum / 1000.0;
+					ticksMedio[i] = ticksSum / 10.0;
 
 					// Hacer Grafico de barras
 				}
@@ -222,4 +225,10 @@ bool resourcesLoaded(bool * array, int size)
 		if (!array[i])
 			retValue = false;
 	return retValue;
+}
+
+void loadArray(double * arr, int size, double value)
+{
+	for (int i = 0; i < size; ++i)
+		arr[i] = value;
 }
