@@ -26,8 +26,11 @@ public:
 	void draw();
 	// Esta funcion carga la imagen al bitmap. Es necesaria para poder dibujar!
 	bool loadBitmap(const char * pathBitmap);
-
+	float getRadius();
 private:
+	float radius;
+	float oldX;
+	float oldY;
 	float x;
 	float y;
 	float angle;

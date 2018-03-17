@@ -6,7 +6,7 @@ Floor::Floor(int row_, int col_, const char * pathCleanBitmap, const char * path
 {
 	this->row = row_;
 	this->col = col_;
-	this->tiles = new bool[row_ * col_];
+	this->tiles = (bool *) calloc(row_ * col_, sizeof(bool));// new bool[row_ * col_ * sizeof(bool)];
 	this->unit = unit_;
 	this->cleanBitmap = al_load_bitmap(pathCleanBitmap);  // Hay que ponerlo lindo
 	this->dirtyBitmap = al_load_bitmap(pathDirtyBitmap);  // Hay que ponerlo lindo
@@ -15,7 +15,7 @@ Floor::Floor(int row_, int col_, const char * pathCleanBitmap, const char * path
 
 Floor::~Floor()
 {
-	delete[] this->tiles;
+	free(this->tiles); // delete[] this->tiles;
 	al_destroy_bitmap(this->cleanBitmap);
 	al_destroy_bitmap(this->dirtyBitmap);
 }
@@ -49,7 +49,7 @@ void Floor::cleanTile(float x, float y)
 			yTile = i;
 	}
 
-	if (xTile > 0 && yTile > 0)//>=0
+	if (xTile >= 0 && yTile >= 0)
 		this->tiles[yTile * this->col + xTile] = true;
 }
 
@@ -93,7 +93,7 @@ void Floor::draw()
 	float currentHeight = al_get_bitmap_height(this->cleanBitmap);
 	for (int i = 0; (i < this->row); ++i)
 		for (int a = 0; (a < this->col); ++a)
-			if (this->tiles[i + a])
+			if (this->tiles[i * this->col + a])
 				al_draw_scaled_bitmap(this->cleanBitmap, 0, 0, currentWidth, currentHeight, a * this->unit, i * this->unit, finalWidth, finalHeight, 0);
 			else
 				al_draw_scaled_bitmap(this->dirtyBitmap, 0, 0, currentWidth, currentHeight, a * this->unit, i * this->unit, finalWidth, finalHeight, 0);

@@ -52,6 +52,7 @@ bool Simulation::cycle()
 
 		if (this->checkCrash(i))
 			this->bots[i].correctPosition(this->unit);
+
 	}
 	return this->ground->isItClean();
 }
@@ -69,10 +70,19 @@ bool Simulation::checkCrash(int robotNumber)
 {
 	bool crash = false;
 
-	if ((this->bots[robotNumber].getXPos() <= 0) || this->bots[robotNumber].getXPos() >= (al_get_display_width(al_get_current_display())))
+	float minX = this->bots[robotNumber].getRadius();
+	float minY = this->bots[robotNumber].getRadius();
+	float maxX = al_get_display_width(al_get_current_display()) - this->bots[robotNumber].getRadius();
+	float maxY = al_get_display_height(al_get_current_display()) - this->bots[robotNumber].getRadius();
+
+	float actualX = this->bots[robotNumber].getXPos();
+	float actualY = this->bots[robotNumber].getYPos();
+
+	if (!((actualX >= minX) && (actualX <= maxX)))
 		crash = true;
-	if ((this->bots[robotNumber].getYPos() <= 0) || this->bots[robotNumber].getXPos() >= (al_get_display_height(al_get_current_display())))
+	if (!((actualY >= minY) && actualY <= maxY))
 		crash = true;
+
 
 	return crash;
 }

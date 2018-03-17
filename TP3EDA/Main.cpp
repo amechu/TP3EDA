@@ -145,7 +145,7 @@ int main(int argc, char *argv[])
 				do{
 					room.draw();
 					ticks++;
-					al_rest(0.05);
+					al_rest(0.7);
 				} while (!room.cycle());
 			}
 			else if (information.mode == MODETWO)
