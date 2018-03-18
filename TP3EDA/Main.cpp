@@ -151,12 +151,16 @@ int main(int argc, char *argv[])
 			if (information.mode == MODEONE)
 			{
 				int ticks = 0;
+				std::string tixt;
 				Simulation room(information.bots, information.row, information.col, (char *) DIRTYTILEBITMAP, (char *)CLEANTILEBITMAP, (char *)ROBOTBITMAP,DISPLAYW,DISPLAYH);
 				// Este while loop es el modo 1. La funcion cycle realiza un ciclo de la simulacion, si sigue habiendo baldosas sucias, va a devolver 'false'
 				// y el loop entra a dibujarlo en pantalla, suma 1 a la cantidad de ticks y espera un tiempo determinado
 				do{
 					room.draw();
 					ticks++;
+					tixt = "Current tick: " + std::to_string(ticks);
+					al_draw_text(font, al_color_name("black"), DISPLAYW / 2, 50, ALLEGRO_ALIGN_CENTRE, tixt.c_str());
+					al_flip_display();
 					al_rest(0.03);
 				} while (!room.cycle());
 				drawSuccess(ticks, font, &keystate);

@@ -27,7 +27,7 @@
 #include <allegro5\allegro_font.h>
 #include <allegro5\allegro_ttf.h> //Copyright (c) 2011-2012, Julieta Ulanovsky, reserved Font Names 'Montserrat'
 #define FONTPATH "mont.ttf" //This Font Software is licensed under the SIL Open Font License, Version 1.1.
-#define FONTSIZE (12 - DISPLAYW/DISPLAYH - DISPLAYH/DISPLAYW + DISPLAYW/200 + DISPLAYH/200)
+#define FONTSIZE (10 - DISPLAYW/DISPLAYH - DISPLAYH/DISPLAYW + DISPLAYW/200 + DISPLAYH/200)
 #endif
 
 // Important Primitives Constants
