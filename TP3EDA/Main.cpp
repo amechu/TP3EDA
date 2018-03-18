@@ -14,10 +14,11 @@
 
 bool resourcesLoaded(bool * array, int size);
 void loadArray(double * arr, int size, double value);
-void drawSuccess(int ticks, ALLEGRO_FONT* font);
+void drawSuccess(int ticks, ALLEGRO_FONT* font, ALLEGRO_KEYBOARD_STATE* keystate);
 
 int main(int argc, char *argv[])
 {
+	ALLEGRO_KEYBOARD_STATE keystate;
 #ifdef DISPLAY_C
 	ALLEGRO_DISPLAY * display = NULL;
 #endif
@@ -158,7 +159,7 @@ int main(int argc, char *argv[])
 					ticks++;
 					al_rest(0.03);
 				} while (!room.cycle());
-				drawSuccess(ticks, font);
+				drawSuccess(ticks, font, &keystate);
 			}
 			else if (information.mode == MODETWO)
 			{
@@ -189,7 +190,7 @@ int main(int argc, char *argv[])
 	}
 	else
 		fprintf(stderr, "Resources were not loaded properly\n Shutting down\n");
-
+		
 
 
 
@@ -228,7 +229,7 @@ int main(int argc, char *argv[])
 #ifdef PRIMITIVES_C
 	if (initResources[PRIMITIVES])
 	{
-		al_shutdown_primitives_addon;
+		al_shutdown_primitives_addon();
 	}
 #endif
 
@@ -251,14 +252,16 @@ void loadArray(double * arr, int size, double value)
 		arr[i] = value;
 }
 
-void drawSuccess(int ticks, ALLEGRO_FONT* font)
+void drawSuccess(int ticks, ALLEGRO_FONT* font, ALLEGRO_KEYBOARD_STATE* keystate)
 {
-
 	 std::string text = "Success! The amount of ticks spent are: " + std::to_string(ticks);
 
-	al_draw_filled_rectangle((DISPLAYW / 3), (DISPLAYH / 2) - (DISPLAYH / 3), (2 * DISPLAYW / 3), (DISPLAYH / 2) + (DISPLAYH / 3), al_color_name("black"));
-	al_draw_text(font, al_color_name("white"), (DISPLAYW / 2), (DISPLAYH / 3), ALLEGRO_ALIGN_CENTRE, text.c_str());
+	al_draw_filled_rectangle((DISPLAYW / 5), (2 * DISPLAYH / 5), (4 * DISPLAYW / 5), (3 * DISPLAYH / 5), al_color_name("black"));
+	al_draw_text(font, al_color_name("white"), (DISPLAYW / 2), ((DISPLAYH / 2) - (3 * FONTSIZE / 5)), ALLEGRO_ALIGN_CENTRE, text.c_str());
 	al_flip_display();
-	al_rest(5);
-
+	
+	do
+	{
+		al_get_keyboard_state(keystate);
+	} while (!(al_key_down(keystate, ALLEGRO_KEY_ENTER)));
 }
