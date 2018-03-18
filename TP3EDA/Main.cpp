@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
 		{
 			initResources[TTFADDON] = true;
 			if (font = al_load_ttf_font(FONTPATH, FONTSIZE, 0))
-				initResources[LASTI + FONT];
+				initResources[LASTI + FONT] = true;
 		}
 #else
 		initResources[TTFADDON] = true;
@@ -258,7 +258,7 @@ void drawSuccess(int ticks, ALLEGRO_FONT* font)
 
 	al_draw_filled_rectangle((DISPLAYW / 3), (DISPLAYH / 2) - (DISPLAYH / 3), (2 * DISPLAYW / 3), (DISPLAYH / 2) + (DISPLAYH / 3), al_color_name("black"));
 	al_draw_text(font, al_color_name("white"), (DISPLAYW / 2), (DISPLAYH / 3), ALLEGRO_ALIGN_CENTRE, text.c_str());
-
+	al_flip_display();
 	al_rest(5);
 
 }
