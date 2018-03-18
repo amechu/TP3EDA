@@ -14,11 +14,11 @@
 
 bool resourcesLoaded(bool * array, int size);
 void loadArray(double * arr, int size, double value);
-void drawSuccess(int ticks, ALLEGRO_FONT* font, ALLEGRO_KEYBOARD_STATE* keystate);
+void waitForKey(char a);
+void drawSuccess(int ticks, ALLEGRO_FONT* font);
 
 int main(int argc, char *argv[])
 {
-	ALLEGRO_KEYBOARD_STATE keystate;
 #ifdef DISPLAY_C
 	ALLEGRO_DISPLAY * display = NULL;
 #endif
@@ -163,7 +163,9 @@ int main(int argc, char *argv[])
 					al_flip_display();
 					al_rest(0.03);
 				} while (!room.cycle());
-				drawSuccess(ticks, font, &keystate);
+				drawSuccess(ticks, font);
+				waitForKey('\n');
+
 			}
 			else if (information.mode == MODETWO)
 			{
@@ -256,7 +258,17 @@ void loadArray(double * arr, int size, double value)
 		arr[i] = value;
 }
 
-void drawSuccess(int ticks, ALLEGRO_FONT* font, ALLEGRO_KEYBOARD_STATE* keystate)
+void waitForKey(char a)
+{
+	ALLEGRO_KEYBOARD_STATE keystate;
+	do
+	{
+		al_rest(0.05);
+		al_get_keyboard_state(&keystate);
+	} while (!(al_key_down(&keystate, ALLEGRO_KEY_ENTER)));
+}
+
+void drawSuccess(int ticks, ALLEGRO_FONT* font )
 {
 	 std::string text = "Success! The amount of ticks spent are: " + std::to_string(ticks);
 
@@ -264,8 +276,4 @@ void drawSuccess(int ticks, ALLEGRO_FONT* font, ALLEGRO_KEYBOARD_STATE* keystate
 	al_draw_text(font, al_color_name("white"), (DISPLAYW / 2), ((DISPLAYH / 2) - (3 * FONTSIZE / 5)), ALLEGRO_ALIGN_CENTRE, text.c_str());
 	al_flip_display();
 	
-	do
-	{
-		al_get_keyboard_state(keystate);
-	} while (!(al_key_down(keystate, ALLEGRO_KEY_ENTER)));
 }
