@@ -2,15 +2,15 @@
 
 #define BARCOLOR "red"
 #define AXISCOLOR "white"
-#define SEPARATION 20.0
 #define WIDTHNEWSIZE 1000
 #define HEIGHTNEWSIZE 500
 #define ORIGINX 30.0
 #define ORIGINY HEIGHTNEWSIZE - 30.0
 #define FINALY 30.0
 #define FINALX WIDTHNEWSIZE - 30.0
-#define SCALEBAR 0.5
-#define BARTHICKNESS 5
+#define SCALEBAR (0.5)
+#define SEPARATION (WIDTHNEWSIZE / 50.0)
+#define BARTHICKNESS (WIDTHNEWSIZE/200.0)
 
 void DrawBarsGraphic(double * array)
 {
