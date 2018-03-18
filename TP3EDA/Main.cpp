@@ -4,13 +4,13 @@
 #include "Simulation.h"
 #include "parseCmdLine.h"
 #include "callback.h"
+#include "BarGraph.h"
 
 
 #define MAXROBOTS (500)
 #define DIRTYTILEBITMAP "DirtyTile.png"
 #define CLEANTILEBITMAP "CleanTile.png"
 #define ROBOTBITMAP "captainShield.png"
-
 
 bool resourcesLoaded(bool * array, int size);
 void loadArray(double * arr, int size, double value);
@@ -153,7 +153,7 @@ int main(int argc, char *argv[])
 			else if (information.mode == MODETWO)
 			{
 				double ticksMedio[MAXROBOTS];
-				loadArray(ticksMedio, MAXROBOTS, 9999999999999);
+				loadArray(ticksMedio, MAXROBOTS, TERMINATOR );
 				// Este es el modo 2, donde se ejecuta la simulacion sin parte grafica de forma que por cada cantidad de robots se ejecutan 1000 simulaciones 
 				// y se realiza un promedio de la cantidad de la cantidad de ticks que tardan cada una. Esto nos va a permitir hacer un grafico de barras al final
 				// y se va a poder ver que cantidad de robots es ideal para limpiar el piso
@@ -162,14 +162,14 @@ int main(int argc, char *argv[])
 				{
 					double ticksSum = 0.0;
 
-					for(int a = 0; a < 10; ++a)
+					for(int a = 0; a < 1000; ++a)
 					{
 						Simulation room(i, information.row, information.col, DIRTYTILEBITMAP, CLEANTILEBITMAP, ROBOTBITMAP);
 						ticksSum += room.run();
 					}
-					ticksMedio[i] = ticksSum / 10.0;
+					ticksMedio[i] = ticksSum / 1000.0;
 
-					// Hacer Grafico de barras
+					DrawBarsGraphic(ticksMedio, display);
 				}
 			}
 		}

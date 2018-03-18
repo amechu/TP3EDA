@@ -14,8 +14,8 @@
 #define DISPLAY_C
 
 // Important Display Constants
-#define DISPLAYW (1500)
-#define DISPLAYH (1500)
+#define DISPLAYW (1000)
+#define DISPLAYH (700)
 
 // Important Timer Constants
 #define REFRESHRATE (60.0)

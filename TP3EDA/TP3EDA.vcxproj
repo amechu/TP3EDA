@@ -74,6 +74,9 @@
     <Allegro_AddonColor>true</Allegro_AddonColor>
     <Allegro_AddonAudio>true</Allegro_AddonAudio>
     <Allegro_AddonAcodec>true</Allegro_AddonAcodec>
+    <Allegro_AddonTTF>true</Allegro_AddonTTF>
+    <Allegro_AddonPrimitives>true</Allegro_AddonPrimitives>
+    <Allegro_AddonFont>true</Allegro_AddonFont>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -124,6 +127,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BarGraph.cpp" />
     <ClCompile Include="callback.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -132,6 +136,7 @@
     <ClCompile Include="Simulation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BarGraph.h" />
     <ClInclude Include="callback.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="main.h" />

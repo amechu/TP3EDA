@@ -36,6 +36,9 @@
     <ClCompile Include="callback.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BarGraph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="callback.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BarGraph.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
