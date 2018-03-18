@@ -19,7 +19,6 @@ public:
 	void draw();
 	// Esta funcion verifica si choca un robot contra la pared
 	bool checkCrash(int robotNumber);
-	
 
 private:
 	Robot * bots;

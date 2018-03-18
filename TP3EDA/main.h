@@ -1,10 +1,12 @@
 #include <allegro5\allegro.h>
 #include <allegro5\allegro_color.h>
 #include <stdio.h>
+#include <string>
 
 // Important compiling stuff
 
-//#define FONT_C
+#define PRIMITIVES_C
+#define FONT_C
 #define AUDIO_C
 //#define KEYBOARD_C
 //#define MOUSE_C
@@ -14,8 +16,8 @@
 #define DISPLAY_C
 
 // Important Display Constants
-#define DISPLAYW (2300)
-#define DISPLAYH (1600)
+#define DISPLAYW (800)
+#define DISPLAYH (600)
 
 // Important Timer Constants
 #define REFRESHRATE (60.0)
@@ -23,9 +25,14 @@
 // Important Font Constants
 #ifdef FONT_C
 #include <allegro5\allegro_font.h>
-#include <allegro5\allegro_ttf.h>
-#define FONTPATH "path"
-#define FONTSIZE (10)
+#include <allegro5\allegro_ttf.h> //Copyright (c) 2011-2012, Julieta Ulanovsky, reserved Font Names 'Montserrat'
+#define FONTPATH "mont.ttf" //This Font Software is licensed under the SIL Open Font License, Version 1.1.
+#define FONTSIZE (18)
+#endif
+
+// Important Primitives Constants
+#ifdef PRIMITIVES_C
+#include <allegro5\allegro_primitives.h>
 #endif
 
 // Important Music Constants
@@ -47,7 +54,7 @@
 
 enum initsAndInstalls
 {
-	ALLEGRO, DISPLAY,IMAGE, EVENTQUEUE, TIMER, TTFADDON, AUDIO, CODEC, RESERVESAMPLES,LASTI
+	ALLEGRO, DISPLAY, IMAGE, EVENTQUEUE, TIMER, TTFADDON, AUDIO, CODEC, RESERVESAMPLES, PRIMITIVES, LASTI
 };
 
 enum createAndDelete

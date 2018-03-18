@@ -14,6 +14,7 @@
 
 bool resourcesLoaded(bool * array, int size);
 void loadArray(double * arr, int size, double value);
+void drawSuccess(int ticks, ALLEGRO_FONT* font);
 
 int main(int argc, char *argv[])
 {
@@ -90,6 +91,14 @@ int main(int argc, char *argv[])
 		initResources[TTFADDON] = true;
 		initResources[LASTI + FONT] = true;
 #endif
+
+#ifdef PRIMITIVES_C
+		if (al_init_primitives_addon())
+			initResources[PRIMITIVES] = true;
+#else
+			initResources[PRIMITIVES] = true;
+#endif
+
 #ifdef AUDIO_C
 		if (al_install_audio())
 			initResources[AUDIO] = true;
@@ -149,6 +158,7 @@ int main(int argc, char *argv[])
 					ticks++;
 					al_rest(0.03);
 				} while (!room.cycle());
+				drawSuccess(ticks, font);
 			}
 			else if (information.mode == MODETWO)
 			{
@@ -215,6 +225,13 @@ int main(int argc, char *argv[])
 	}
 #endif
 
+#ifdef PRIMITIVES_C
+	if (initResources[PRIMITIVES])
+	{
+		al_shutdown_primitives_addon;
+	}
+#endif
+
 	return 0;
 }
 
@@ -232,4 +249,16 @@ void loadArray(double * arr, int size, double value)
 {
 	for (int i = 0; i < size; ++i)
 		arr[i] = value;
+}
+
+void drawSuccess(int ticks, ALLEGRO_FONT* font)
+{
+
+	 std::string text = "Success! The amount of ticks spent are: " + std::to_string(ticks);
+
+	al_draw_filled_rectangle((DISPLAYW / 3), (DISPLAYH / 2) - (DISPLAYH / 3), (2 * DISPLAYW / 3), (DISPLAYH / 2) + (DISPLAYH / 3), al_color_name("black"));
+	al_draw_text(font, al_color_name("white"), (DISPLAYW / 2), (DISPLAYH / 3), ALLEGRO_ALIGN_CENTRE, text.c_str());
+
+	al_rest(5);
+
 }
