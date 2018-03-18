@@ -6,7 +6,7 @@ class Floor
 {
 public:
 	// Constructor de la clase
-	Floor( int row_,  int col_, const char * pathCleanBitmap, const char * pathDirtyBitmap, float unit_);
+	Floor( int row_,  int col_, const char * pathCleanBitmap, const char * pathDirtyBitmap, double unitX_, double unitY_);
 	// Destructor de la clase
 	~Floor();
 	// Limpia todo el piso ( lo setea en 'true' )
@@ -22,15 +22,16 @@ public:
 	// Dibuja en pantalla el piso
 	void draw();
 	// Devuelve el numero de columnas que tiene el piso
-	int getColNumber();
+	double getWidth();
 	// Devuelve el numero de filas que tiene el piso
-	int getRowNumber();
+	double getHeight();
 
 private:
 	int row;
 	int col;
 	bool * tiles;
-	float unit;
+	float unitX;
+	float unitY;
 	ALLEGRO_BITMAP * cleanBitmap;
 	ALLEGRO_BITMAP * dirtyBitmap;
 };

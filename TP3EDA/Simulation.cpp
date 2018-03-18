@@ -3,14 +3,14 @@
 
 
 
-Simulation::Simulation(int ammountRobots_, int row_, int col_, const char * pathDirtyBitmap, const char * pathCleanBitmap, const char * pathRobotBitmap)
+Simulation::Simulation(int ammountRobots_, int row_, int col_, const char * pathDirtyBitmap, const char * pathCleanBitmap, const char * pathRobotBitmap, double displayW, double displayH)
 {
-	float unitW = al_get_display_width(al_get_current_display()) / (float)col_;
-	float unitH = al_get_display_height(al_get_current_display()) / (float)row_;
+	float unitW = displayW / (float)col_;
+	float unitH = displayH / (float)row_;
 
 	this->unit = (unitH > unitW ? unitW : unitH);
 
-	this->ground = new Floor(row_, col_, pathCleanBitmap, pathDirtyBitmap, this->unit);
+	this->ground = new Floor(row_, col_, pathCleanBitmap, pathDirtyBitmap,unitW, unitH);
 	this->ground->litterAll();
 
 	this->bots = new Robot[ammountRobots_];
@@ -22,7 +22,7 @@ Simulation::Simulation(int ammountRobots_, int row_, int col_, const char * path
 	bool load = true;
 
 	for (int i = 0; (i < ammountRobots_) && (load); ++i)	// Hay que ver como salgo de aca. El constructor no puede devolver datos creo
-		if (!this->bots[i].loadExternalInfo(pathRobotBitmap, this->unit /2.0))
+		if (!this->bots[i].loadExternalInfo(pathRobotBitmap, this->unit /2.0,displayH, displayW ))
 			load = false;
 }
 
@@ -71,8 +71,8 @@ bool Simulation::checkCrash(int robotNumber)
 
 	float minX = this->bots[robotNumber].getRadius();
 	float minY = this->bots[robotNumber].getRadius();
-	float maxX = al_get_display_width(al_get_current_display()) - this->bots[robotNumber].getRadius();// (this->ground->getColNumber() * this->unit) - this->bots[robotNumber].getRadius();
-	float maxY = al_get_display_height(al_get_current_display()) - this->bots[robotNumber].getRadius();// (this->ground->getRowNumber() * this->unit) - this->bots[robotNumber].getRadius();
+	float maxX = this->ground->getWidth() - this->bots[robotNumber].getRadius();
+	float maxY = this->ground->getHeight()- this->bots[robotNumber].getRadius();
 
 	float actualX = this->bots[robotNumber].getXPos();
 	float actualY = this->bots[robotNumber].getYPos();

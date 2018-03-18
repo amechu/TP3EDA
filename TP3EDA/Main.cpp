@@ -141,7 +141,7 @@ int main(int argc, char *argv[])
 			if (information.mode == MODEONE)
 			{
 				int ticks = 0;
-				Simulation room(information.bots, information.row, information.col, (char *) DIRTYTILEBITMAP, (char *)CLEANTILEBITMAP, (char *)ROBOTBITMAP);
+				Simulation room(information.bots, information.row, information.col, (char *) DIRTYTILEBITMAP, (char *)CLEANTILEBITMAP, (char *)ROBOTBITMAP,DISPLAYW,DISPLAYH);
 				// Este while loop es el modo 1. La funcion cycle realiza un ciclo de la simulacion, si sigue habiendo baldosas sucias, va a devolver 'false'
 				// y el loop entra a dibujarlo en pantalla, suma 1 a la cantidad de ticks y espera un tiempo determinado
 				do{
@@ -164,12 +164,12 @@ int main(int argc, char *argv[])
 
 					for(int a = 0; a < 1000; ++a)
 					{
-						Simulation room(i, information.row, information.col, DIRTYTILEBITMAP, CLEANTILEBITMAP, ROBOTBITMAP);
+						Simulation room(i, information.row, information.col, DIRTYTILEBITMAP, CLEANTILEBITMAP, ROBOTBITMAP, information.col * 10, information.row * 10);
 						ticksSum += room.run();
 					}
 					ticksMedio[i] = ticksSum / 1000.0;
 
-					DrawBarsGraphic(ticksMedio, display);
+					DrawBarsGraphic(ticksMedio);
 				}
 			}
 		}

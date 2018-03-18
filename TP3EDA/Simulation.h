@@ -7,7 +7,7 @@ class Simulation
 {
 public:
 	// Es el constructor de la sumulacion, le pasamos la cantidad de robots, de filas y de columnas, ademas de las imagenes para el piso sucio, limpio y de los robots.
-	Simulation(int ammountRobots_, int row_, int col_, const char * pathDirtyBitmap, const char * pathCleanBitmap, const char * pathRobotBitmap);
+	Simulation(int ammountRobots_, int row_, int col_, const char * pathDirtyBitmap, const char * pathCleanBitmap, const char * pathRobotBitmap, double displayW, double displayH);
 	// Es el destructor, cuando termina de usarse la clase mata a todos los bitmaps y la memoria reservada dinamicamente
 	~Simulation();
 	// Este seria el modo 2. ejecuta la simulacion y devuelve la cantidad de ticks sin imprimir nada en pantalla.

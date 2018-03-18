@@ -4,8 +4,8 @@
 
 Robot::Robot()
 {
-	this->x = rand() % (int)(al_get_display_width(al_get_current_display()));
-	this->y = rand() % (int)(al_get_display_height(al_get_current_display()));
+	//this->x = rand() % (int)(al_get_display_width(al_get_current_display()));
+	//this->y = rand() % (int)(al_get_display_height(al_get_current_display()));
 	this->updateDirection();
 
 }
@@ -16,24 +16,14 @@ Robot::~Robot()
 	al_destroy_bitmap(this->bitmap);
 }
 
-bool Robot::loadExternalInfo(const char * pathBitmap,float radius_)
+bool Robot::loadExternalInfo(const char * pathBitmap,float radius_, double displayH_, double displayW_)
 {
 	bool retValue;
+
 	this->radius = radius_;
-	float displayW = al_get_display_width(al_get_current_display());
-	float displayH = al_get_display_height(al_get_current_display());
 
-	if ((this->x > this->radius) && (this->x < displayW - (this->radius * 2)))
-		this->x += radius;
-
-	if ((this->x > displayW - this->radius) && (this->x < displayW))
-		this->x -= this->radius;
-
-	if ((this->y > this->radius) && (this->y < displayH - (this->radius * 2)))
-		this->y += radius;
-
-	if ((this->y > displayH - this->radius) && (this->y < displayH))
-		this->y -= this->radius;
+	this->x = this->radius + (rand() % (int)(displayW_ - this->radius));
+	this->y = this->radius + (rand() % (int)(displayH_ - this->radius));
 
 
 

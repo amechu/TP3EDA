@@ -12,9 +12,9 @@
 #define SCALEBAR 0.5
 #define BARTHICKNESS 5
 
-void DrawBarsGraphic(double * array, ALLEGRO_DISPLAY * display)
+void DrawBarsGraphic(double * array)
 {
-	
+	ALLEGRO_DISPLAY * display = al_get_current_display();
 	
 	if (al_init_primitives_addon())
 	{
