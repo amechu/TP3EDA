@@ -92,7 +92,7 @@ int main(int argc, char *argv[])
 		if (al_init_ttf_addon())
 		{
 			initResources[TTFADDON] = true;
-			if (font = al_load_ttf_font(FONTPATH, FONTSIZE, 0))
+			if (font = al_load_ttf_font(FONTPATH, -FONTSIZE, 0)) // Si pones el tama;o de la fuente negativo, entonces la toma como pixeles en vez de una cosa rar
 				initResources[LASTI + FONT] = true;
 		}
 #else
@@ -172,7 +172,9 @@ int main(int argc, char *argv[])
 						al_rest(0.03);
 
 				} while (!framework.cycle());
+				drawBanner(font, ticks, DISPLAYH - BANNERHEIGHT, "black", information.bots);
 				drawSuccess(ticks, font);
+				al_flip_display();
 				waitForKey('\n');
 
 			}
@@ -272,7 +274,7 @@ void waitForKey(char a)
 	ALLEGRO_KEYBOARD_STATE keystate;
 	do
 	{
-		al_rest(0.05);
+		al_rest(0.1);
 		al_get_keyboard_state(&keystate);
 	} while (!(al_key_down(&keystate, ALLEGRO_KEY_ENTER)));
 }
@@ -282,15 +284,19 @@ void drawSuccess(int ticks, ALLEGRO_FONT* font )
 	 string text = "Success! The amount of ticks spent are: " + to_string(ticks);
 	 string getOut = "Please press 'enter' to leave";
 
-	 float firstLineY = ((DISPLAYH / 2) - (3 * FONTSIZE / 5)) - al_get_font_line_height(font);
-	 float secondLineY = firstLineY + 2 * al_get_font_line_height(font);
-	 float lineX = (DISPLAYW / 2);
+	 ALLEGRO_DISPLAY * display = al_get_current_display();
+	 float displayH = al_get_display_height(display);
+	 float displayW = al_get_display_width(display);
 
-	al_draw_filled_rectangle((DISPLAYW / 5), (2 * DISPLAYH / 5), (4 * DISPLAYW / 5), (3 * DISPLAYH / 5), al_color_name("black"));
+	 float fontSize = al_get_font_line_height(font);
+
+	 float firstLineY = ((displayH / 2) - (3 * fontSize / 5)) - fontSize;
+	 float secondLineY = firstLineY + 2 * fontSize;
+	 float lineX = (displayW / 2);
+
+	al_draw_filled_rectangle((displayW / 5), (2 * displayH / 5), (4 * displayW / 5), (3 * displayH / 5), al_color_name("black"));
 	al_draw_text(font, al_color_name("white"), lineX, firstLineY, ALLEGRO_ALIGN_CENTRE, text.c_str());
 	al_draw_text(font, al_color_name("white"), lineX, secondLineY, ALLEGRO_ALIGN_CENTRE, getOut.c_str());
-
-	al_flip_display();
 	
 }
 

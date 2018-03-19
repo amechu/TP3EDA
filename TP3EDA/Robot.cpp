@@ -22,8 +22,8 @@ bool Robot::loadExternalInfo(const char * pathBitmap,float radius_, double displ
 
 	this->radius = radius_;
 
-	this->x = this->radius + (rand() % (int)(displayW_ - this->radius));
-	this->y = this->radius + (rand() % (int)(displayH_ - this->radius));
+	this->x = this->radius + (rand() % (int)(displayW_ - 2 * this->radius));
+	this->y = this->radius + (rand() % (int)(displayH_ - 2 * this->radius));
 
 
 
