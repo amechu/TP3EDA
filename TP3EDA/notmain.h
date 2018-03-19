@@ -16,8 +16,8 @@
 #define DISPLAY_C
 
 // Important Display Constants
-#define DISPLAYW (2300)
-#define DISPLAYH (1600)
+#define DISPLAYW (2000)
+#define DISPLAYH (1300)
 
 // Important Timer Constants
 #define REFRESHRATE (60.0)
@@ -27,7 +27,7 @@
 #include <allegro5\allegro_font.h>
 #include <allegro5\allegro_ttf.h> //Copyright (c) 2011-2012, Julieta Ulanovsky, reserved Font Names 'Montserrat'
 #define FONTPATH "mont.ttf" //This Font Software is licensed under the SIL Open Font License, Version 1.1.
-#define FONTSIZE (10 - DISPLAYW/DISPLAYH - DISPLAYH/DISPLAYW + DISPLAYW/200 + DISPLAYH/200)
+#define FONTSIZE (10 - DISPLAYW/DISPLAYH - DISPLAYH/DISPLAYW + DISPLAYW/100 + DISPLAYH/100)
 #endif
 
 // Important Primitives Constants

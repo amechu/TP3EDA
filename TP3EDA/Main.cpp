@@ -6,16 +6,23 @@
 #include "callback.h"
 #include "BarGraph.h"
 
+using namespace std;
+
 
 #define MAXROBOTS (500)
 #define DIRTYTILEBITMAP "DirtyTile.png"
 #define CLEANTILEBITMAP "CleanTile.png"
 #define ROBOTBITMAP "captainShield.png"
 
+#define BANNERHEIGHT (DISPLAYH / 10.0)
+#define ESCAPEKEY (27)
+
 bool resourcesLoaded(bool * array, int size);
 void loadArray(double * arr, int size, double value);
 void waitForKey(char a);
 void drawSuccess(int ticks, ALLEGRO_FONT* font);
+void drawBanner(ALLEGRO_FONT * font, int ticks, float top, const char * bannerColor, int bots);
+
 
 int main(int argc, char *argv[])
 {
@@ -92,14 +99,12 @@ int main(int argc, char *argv[])
 		initResources[TTFADDON] = true;
 		initResources[LASTI + FONT] = true;
 #endif
-
 #ifdef PRIMITIVES_C
 		if (al_init_primitives_addon())
 			initResources[PRIMITIVES] = true;
 #else
 			initResources[PRIMITIVES] = true;
 #endif
-
 #ifdef AUDIO_C
 		if (al_install_audio())
 			initResources[AUDIO] = true;
@@ -150,23 +155,23 @@ int main(int argc, char *argv[])
 		default:
 			if (information.mode == MODEONE)
 			{
-				int ticks = 0;
-				std::string tixt;
-				Simulation room(information.bots, information.row, information.col, (char *) DIRTYTILEBITMAP, (char *)CLEANTILEBITMAP, (char *)ROBOTBITMAP,DISPLAYW,DISPLAYH);
+				int ticks = 0;				
+				Simulation framework(information.bots, information.row, information.col, (char *) DIRTYTILEBITMAP, (char *)CLEANTILEBITMAP, (char *)ROBOTBITMAP,DISPLAYW,DISPLAYH - BANNERHEIGHT);
 				// Este while loop es el modo 1. La funcion cycle realiza un ciclo de la simulacion, si sigue habiendo baldosas sucias, va a devolver 'false'
 				// y el loop entra a dibujarlo en pantalla, suma 1 a la cantidad de ticks y espera un tiempo determinado
 				do{
-					room.draw();
-					ticks++;
-					tixt = "Current tick: " + std::to_string(ticks);
-					al_draw_text(font, al_color_name("black"), DISPLAYW / 2, 50, ALLEGRO_ALIGN_CENTRE, tixt.c_str());
+					framework.draw();
+					drawBanner(font, ticks, DISPLAYH - BANNERHEIGHT, "black", information.bots);
 					al_flip_display();
+
+					ticks++;
 
 					if (information.step)
 						waitForKey('\n');
 					else
 						al_rest(0.03);
-				} while (!room.cycle());
+
+				} while (!framework.cycle());
 				drawSuccess(ticks, font);
 				waitForKey('\n');
 
@@ -185,8 +190,8 @@ int main(int argc, char *argv[])
 
 					for(int a = 0; a < 1000; ++a)
 					{
-						Simulation room(i, information.row, information.col, DIRTYTILEBITMAP, CLEANTILEBITMAP, ROBOTBITMAP, information.col * 10, information.row * 10);
-						ticksSum += room.run();
+						Simulation framework(i, information.row, information.col, DIRTYTILEBITMAP, CLEANTILEBITMAP, ROBOTBITMAP, information.col * 10, information.row * 10);
+						ticksSum += framework.run();
 					}
 					ticksMedio[i] = ticksSum / 1000.0;
 
@@ -274,10 +279,35 @@ void waitForKey(char a)
 
 void drawSuccess(int ticks, ALLEGRO_FONT* font )
 {
-	 std::string text = "Success! The amount of ticks spent are: " + std::to_string(ticks);
+	 string text = "Success! The amount of ticks spent are: " + to_string(ticks);
+	 string getOut = "Please press 'enter' to leave";
+
+	 float firstLineY = ((DISPLAYH / 2) - (3 * FONTSIZE / 5)) - al_get_font_line_height(font);
+	 float secondLineY = firstLineY + 2 * al_get_font_line_height(font);
+	 float lineX = (DISPLAYW / 2);
 
 	al_draw_filled_rectangle((DISPLAYW / 5), (2 * DISPLAYH / 5), (4 * DISPLAYW / 5), (3 * DISPLAYH / 5), al_color_name("black"));
-	al_draw_text(font, al_color_name("white"), (DISPLAYW / 2), ((DISPLAYH / 2) - (3 * FONTSIZE / 5)), ALLEGRO_ALIGN_CENTRE, text.c_str());
+	al_draw_text(font, al_color_name("white"), lineX, firstLineY, ALLEGRO_ALIGN_CENTRE, text.c_str());
+	al_draw_text(font, al_color_name("white"), lineX, secondLineY, ALLEGRO_ALIGN_CENTRE, getOut.c_str());
+
 	al_flip_display();
 	
+}
+
+
+void drawBanner(ALLEGRO_FONT * font, int ticks, float top, const char * bannerColor, int bots)
+{
+	string tixt, robotCountString;
+	ALLEGRO_DISPLAY * display = al_get_current_display();
+	float height = al_get_display_height(display);
+	float width = al_get_display_width(display);
+	float bannerHeight = height - top;
+
+	al_draw_filled_rectangle(0, top,width ,height, al_color_name(bannerColor));
+
+	tixt = "Current tick: " + to_string(ticks);
+	robotCountString = "Ammount of robots: " + to_string(bots);
+
+	al_draw_text(font, al_color_name("white"), width / 4.0, top + bannerHeight / 2.8, ALLEGRO_ALIGN_CENTRE, tixt.c_str());
+	al_draw_text(font, al_color_name("white"), width * 3 / 4.0, top + bannerHeight / 2.8, ALLEGRO_ALIGN_CENTRE, robotCountString.c_str());
 }
