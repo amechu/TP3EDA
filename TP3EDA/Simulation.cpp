@@ -62,7 +62,6 @@ void Simulation::draw()
 	this->ground->draw();
 	for (int i = 0; i < this->ammountBots; ++i)
 		this->bots[i].draw();
-	al_flip_display();
 }
 
 bool Simulation::checkCrash(int robotNumber)

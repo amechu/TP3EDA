@@ -161,7 +161,11 @@ int main(int argc, char *argv[])
 					tixt = "Current tick: " + std::to_string(ticks);
 					al_draw_text(font, al_color_name("black"), DISPLAYW / 2, 50, ALLEGRO_ALIGN_CENTRE, tixt.c_str());
 					al_flip_display();
-					al_rest(0.03);
+
+					if (information.step)
+						waitForKey('\n');
+					else
+						al_rest(0.03);
 				} while (!room.cycle());
 				drawSuccess(ticks, font);
 				waitForKey('\n');

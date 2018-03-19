@@ -16,6 +16,7 @@ typedef struct {
 	int row = 0;
 	int mode = 0;
 	int bots = 0;
+	int step = 0;
 } usrInput;
 
 int fillInformation(char * pass, char * value, void * userData);

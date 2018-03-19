@@ -32,6 +32,12 @@ int fillInformation(char * pass, char * value, void * userData)
 			if ((usr->mode != MODEONE) && (usr->mode != MODETWO))
 				retValue = ERRORTYPE3;
 		}
+		else if ((!usr->step) && !strcmp(_strlwr((char *)pass), "step"))
+		{
+			usr->step = atoi(value);
+			if (usr->step != 1 && usr->step !=0)
+				retValue = ERRORTYPE3;
+		}
 		else
 			retValue = ERRORTYPE3;  // This error means that the user used an incorrect keyword
 	}
