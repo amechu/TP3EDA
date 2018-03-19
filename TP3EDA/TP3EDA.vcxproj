@@ -139,7 +139,7 @@
     <ClInclude Include="BarGraph.h" />
     <ClInclude Include="callback.h" />
     <ClInclude Include="Floor.h" />
-    <ClInclude Include="main.h" />
+    <ClInclude Include="notmain.h" />
     <ClInclude Include="parseCmdLine.h" />
     <ClInclude Include="Robot.h" />
     <ClInclude Include="Simulation.h" />

@@ -1,4 +1,4 @@
-#include "main.h"
+#include "notmain.h"
 #include "Floor.h"
 #include "Robot.h"
 #include "Simulation.h"
