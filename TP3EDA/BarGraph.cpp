@@ -1,4 +1,4 @@
-#include "BarGraph.h"
+/*#include "BarGraph.h"
 
 #define BARCOLOR "red"
 #define AXISCOLOR "white"
@@ -25,10 +25,10 @@
 #define NUMLENGHT 15
 
 /*Inicializa un arreglo de char colocando en cada posicion el terminador '\0'
-Recibe el puntero al arreglo de char y la cantidad de elemetos */
+Recibe el puntero al arreglo de char y la cantidad de elemetos 
 static void initilizateCharString(char *stringnum, int elements);
 
-/*Convierte un int en un arreglo de char*/
+/*Convierte un int en un arreglo de char
 static void intostr(char* stringnum, int someint);
 
 void DrawBarsGraphic(double * array)
@@ -131,3 +131,113 @@ static void intostr(char* stringnum, int someint)
 {
 	sprintf(stringnum, "%d", someint);
 }
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include "notmain.h"
+#include "BarGraph.h"
+
+void drawAxis(const int scrW, const int scrH)
+{
+	ALLEGRO_DISPLAY* display = al_get_current_display();
+	ALLEGRO_FONT * font = NULL;
+	font = al_load_ttf_font(FONTPATH, 10, 0);
+
+	al_clear_to_color(al_color_name("grey"));
+
+	al_draw_line(40, 50, 40, scrH - 50, al_color_name("white"), 2);
+	al_draw_line(40, scrH-50, scrW-60, scrH - 50, al_color_name("white"), 2);
+
+	al_draw_text(font, al_color_name("white"), 40, 30, ALLEGRO_ALIGN_CENTRE, "Tick's average");
+	al_draw_text(font, al_color_name("white"), scrW - 28, scrH - 57, ALLEGRO_ALIGN_CENTRE, "Robots");
+
+	al_flip_display();
+}
+
+void drawBar(const int scrW, const int scrH, const double average, const int barPos)
+{
+	ALLEGRO_DISPLAY* display = al_get_current_display();
+	ALLEGRO_FONT * font = NULL;
+	font = al_load_ttf_font(FONTPATH, 10, 0);
+
+	static float heightOffset;
+
+	//Cool math stuff
+	const int barOffset = 40;
+	const int yAxisSeparationFromFloor = 50;
+	const int separation = 10;
+	const int xAxis = scrW - barOffset;
+	const int yAxis = scrH - barOffset;
+	const int barTotal = 30;
+	const int usedPixelsBySeparation = (barTotal * separation) + separation;
+	const int barWidth = (xAxis - usedPixelsBySeparation) / barTotal;
+	const int tallestBar = yAxis;
+
+	if (barPos == 1)
+		heightOffset = average - tallestBar;
+
+	const int currentBarXPosition = (barOffset + (separation*barPos) + (barWidth*(barPos - 1)));
+	const int currentBarYPosition = (scrH - yAxisSeparationFromFloor - average + heightOffset + 60);
+
+	al_draw_filled_rectangle(currentBarXPosition, currentBarYPosition, currentBarXPosition + barWidth, scrH-yAxisSeparationFromFloor, al_color_name("burgundy"));
+	al_flip_display();
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

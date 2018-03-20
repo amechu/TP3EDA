@@ -157,7 +157,7 @@ int main(int argc, char *argv[])
 		}
 		default:
 			if (information.mode == MODEONE)
-			{
+			{/*
 				int ticks = 0;				
 				Simulation framework(information.bots, information.row, information.col, (char *) DIRTYTILEBITMAP, (char *)CLEANTILEBITMAP, (char *)ROBOTBITMAP,DISPLAYW,DISPLAYH - BANNERHEIGHT);
 				// Este while loop es el modo 1. La funcion cycle realiza un ciclo de la simulacion, si sigue habiendo baldosas sucias, va a devolver 'false'
@@ -179,19 +179,22 @@ int main(int argc, char *argv[])
 				drawSuccess(ticks, font);
 				al_flip_display();
 				waitForKey('\n');
-
+				*/
 			}
 			else if (information.mode == MODETWO)
 			{
+				double ticksSum;
 				double ticksMedio[MAXROBOTS];
-				loadArray(ticksMedio, MAXROBOTS, TERMINATOR );
+				loadArray(ticksMedio, MAXROBOTS, 9999999999999.0);
+				drawAxis(DISPLAYW, DISPLAYH);
+
 				// Este es el modo 2, donde se ejecuta la simulacion sin parte grafica de forma que por cada cantidad de robots se ejecutan 1000 simulaciones 
 				// y se realiza un promedio de la cantidad de la cantidad de ticks que tardan cada una. Esto nos va a permitir hacer un grafico de barras al final
 				// y se va a poder ver que cantidad de robots es ideal para limpiar el piso
 				
 				for(int i = 1;  (i<MAXROBOTS) && (i == 1 ? true : (ticksMedio[i] - ticksMedio[i - 1] >0.1)); ++i)
 				{
-					double ticksSum = 0.0;
+					ticksSum = 0.0;
 
 					for(int a = 0; a < 1000; ++a)
 					{
@@ -200,11 +203,19 @@ int main(int argc, char *argv[])
 					}
 					ticksMedio[i] = ticksSum / 1000.0;		//Asigna el promedio de ticks para las 1000 simulaciones
 
-					DrawBarsGraphic(ticksMedio);
+					drawBar(DISPLAYW, DISPLAYH, ticksSum/1000.0, i);
+					
 				}
 			}
 		}
 //Hasta acá llega la parte importante del main
+
+		auto enter = []()
+		{ ALLEGRO_KEYBOARD_STATE keystate;
+		do { al_rest(0.1); al_get_keyboard_state(&keystate); } while (!(al_key_down(&keystate, ALLEGRO_KEY_ENTER)));
+		};
+		enter();
+
 	}
 	else
 		fprintf(stderr, "Resources were not loaded properly\n Shutting down\n");
