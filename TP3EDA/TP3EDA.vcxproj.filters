@@ -36,7 +36,7 @@
     <ClCompile Include="callback.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BarGraph.cpp">
+    <ClCompile Include="Draw.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,10 +56,10 @@
     <ClInclude Include="callback.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BarGraph.h">
+    <ClInclude Include="notmain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="notmain.h">
+    <ClInclude Include="Draw.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -20,6 +20,7 @@ using namespace std;
 bool resourcesLoaded(bool * array, int size);
 void loadArray(double * arr, int size, double value);
 void waitForKey(char a);
+void help(void);
 
 int main(int argc, char *argv[])
 {

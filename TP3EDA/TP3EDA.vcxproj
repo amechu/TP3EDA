@@ -127,7 +127,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BarGraph.cpp" />
+    <ClCompile Include="Draw.cpp" />
     <ClCompile Include="callback.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -136,7 +136,7 @@
     <ClCompile Include="Simulation.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BarGraph.h" />
+    <ClInclude Include="Draw.h" />
     <ClInclude Include="callback.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="notmain.h" />

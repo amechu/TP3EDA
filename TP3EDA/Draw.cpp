@@ -1,5 +1,5 @@
 #include "notmain.h"
-#include "BarGraph.h"
+#include "Draw.h"
 
 using namespace std;
 #define BANNERTEXTCOLOR "black"
