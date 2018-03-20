@@ -20,6 +20,7 @@ using namespace std;
 bool resourcesLoaded(bool * array, int size);
 void loadArray(double * arr, int size, double value);
 void waitForKey(char a);
+void help (void);
 
 int main(int argc, char *argv[])
 {
@@ -151,7 +152,7 @@ int main(int argc, char *argv[])
 			break;
 		case HELP:
 		{
-//			help();					//Comentado hasta que la funcion esté
+			help();					//Comentado hasta que la funcion esté
 			break;
 		}
 		default:
@@ -279,5 +280,12 @@ void waitForKey(char a)
 
 void help(void)
 {
-
+	printf("Uso: ./SimRob [-MODE] [-COLUMNS] [-ROWS] [-BOTS] [-STEP]\n\n");
+	printf("-MODE: que tipo de modo se desea correr.\n");
+	printf("	1 -> Modo simulacion. Corre una simulacion del programa y la enseña paso a paso.\n");
+	printf("	2 -> Modo promedio grafico. Encuentra que cantidad de robots da un promedio de tiempo de limpieza\n			con diferencia menor a 0.1 respecto a la cantidad mas uno.\n");
+	printf("-COLUMNS: cantidad de columnas.\n");
+	printf("-ROWS: cantidad de filas.\n");
+	printf("-BOTS: cantidad de robots. En caso de elegir modo 2, este valor no sera tenido en cuenta.\n");
+	printf("-STEP: \n");
 }

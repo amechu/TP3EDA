@@ -38,13 +38,14 @@ int fillInformation(char * pass, char * value, void * userData)
 			if (usr->step != 1 && usr->step !=0)
 				retValue = ERRORTYPE3;
 		}
-		else if ((!usr->help) && !strcmp(_strlwr((char *)pass), "help"))
-		{
-			retValue = HELP;
-		}
 		else
 			retValue = ERRORTYPE3;  // This error means that the user used an incorrect keyword
 	}
+	else if(value)
+		if ((!usr->help) && !strcmp(_strlwr((char *)value), "help"))
+		{
+			retValue = HELP;
+		}
 	else
 		retValue = ERRORTYPE3;
 
