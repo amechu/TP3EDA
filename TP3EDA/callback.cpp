@@ -42,9 +42,9 @@ int fillInformation(char * pass, char * value, void * userData)
 			retValue = ERRORTYPE3;  // This error means that the user used an incorrect keyword
 	}
 	else if(value)
-		if ((!usr->help) && !strcmp(_strlwr((char *)value), "help"))
+		if ((!usr->noaudio) && !strcmp(_strlwr((char *)value), "noaudio"))
 		{
-			retValue = HELP;
+			retValue = NOAUDIO;
 		}
 	else
 		retValue = ERRORTYPE3;

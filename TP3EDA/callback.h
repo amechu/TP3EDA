@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define HELP 1
+#define NOAUDIO 1
 
 #define NOERROR 0
 #define ERRORTYPE1 -1
@@ -19,7 +19,7 @@ typedef struct {
 	int mode = 0;
 	int bots = 0;
 	int step = 0;
-	int help = 0;
+	int noaudio = 0;
 } usrInput;
 
 int fillInformation(char * pass, char * value, void * userData);
