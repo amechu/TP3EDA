@@ -152,6 +152,11 @@ int main(int argc, char *argv[])
 			break;
 		case ERRORTYPE3:
 			break;
+		case HELP:
+		{
+			help();
+			break;
+		}
 		default:
 			if (information.mode == MODEONE)
 			{
@@ -316,4 +321,10 @@ void drawBanner(ALLEGRO_FONT * font, int ticks, float top, const char * bannerCo
 
 	al_draw_text(font, al_color_name("white"), width / 4.0, top + bannerHeight / 2.8, ALLEGRO_ALIGN_CENTRE, tixt.c_str());
 	al_draw_text(font, al_color_name("white"), width * 3 / 4.0, top + bannerHeight / 2.8, ALLEGRO_ALIGN_CENTRE, robotCountString.c_str());
+}
+
+
+void help(void)
+{
+
 }
