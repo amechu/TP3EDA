@@ -29,5 +29,5 @@ void drawBanner(ALLEGRO_FONT * font, int ticks, float top, const char * bannerCo
 void drawAxis(const int scrW, const int scrH);
 void drawBar(const int scrW, const int scrH, double average, int barPos);
 
-//al_draw_text(font, al_color_name("black"), currentBarXPosition + (barWidth / 2), currentBarYPosition + 10, ALLEGRO_ALIGN_CENTRE, "tixt");
-//std::string tixt = std::to_string(average);
+//
+//

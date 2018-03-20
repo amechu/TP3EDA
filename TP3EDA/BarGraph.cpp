@@ -190,7 +190,7 @@ void drawAxis(const int scrW, const int scrH)
 	al_draw_line(40, 50, 40, scrH - 50, al_color_name("white"), 2);
 	al_draw_line(40, scrH-50, scrW-60, scrH - 50, al_color_name("white"), 2);
 
-	al_draw_text(font, al_color_name("white"), 40, 30, ALLEGRO_ALIGN_CENTRE, "Tick's average");
+	al_draw_text(font, al_color_name("white"), 30, 50, ALLEGRO_ALIGN_RIGHT, "Ticks");
 	al_draw_text(font, al_color_name("white"), scrW - 28, scrH - 57, ALLEGRO_ALIGN_CENTRE, "Robots");
 
 	al_flip_display();
@@ -201,6 +201,8 @@ void drawBar(const int scrW, const int scrH, const double average, const int bar
 	ALLEGRO_DISPLAY* display = al_get_current_display();
 	ALLEGRO_FONT * font = NULL;
 	font = al_load_ttf_font(FONTPATH, 10, 0);
+
+	std::string tixt = std::to_string((int)average);
 
 	static float heightOffset;
 
@@ -221,7 +223,8 @@ void drawBar(const int scrW, const int scrH, const double average, const int bar
 	const int currentBarXPosition = (barOffset + (separation*barPos) + (barWidth*(barPos - 1)));
 	const int currentBarYPosition = (scrH - yAxisSeparationFromFloor - average + heightOffset + 60);
 
-	al_draw_filled_rectangle(currentBarXPosition, currentBarYPosition, currentBarXPosition + barWidth, scrH-yAxisSeparationFromFloor, al_color_name("burgundy"));
+	al_draw_filled_rectangle(currentBarXPosition, currentBarYPosition, currentBarXPosition + barWidth, scrH-yAxisSeparationFromFloor, al_color_name("red"));
+	al_draw_text(font, al_color_name("black"), currentBarXPosition + (barWidth / 2), currentBarYPosition - 20, ALLEGRO_ALIGN_CENTRE, tixt.c_str());
 	al_flip_display();
 
 }
