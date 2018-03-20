@@ -25,6 +25,3 @@ void drawBanner(ALLEGRO_FONT * font, int ticks, float top, const char * bannerCo
 
 void drawAxis(const int scrW, const int scrH);
 void drawBar(const int scrW, const int scrH, double average, int barPos, double firstValue);
-
-//
-//

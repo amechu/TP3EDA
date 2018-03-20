@@ -44,6 +44,7 @@ int fillInformation(char * pass, char * value, void * userData)
 	else if(value)
 		if ((!usr->noaudio) && !strcmp(_strlwr((char *)value), "noaudio"))
 		{
+			usr->noaudio = true;
 			retValue = NOAUDIO;
 		}
 	else

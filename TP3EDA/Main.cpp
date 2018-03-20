@@ -4,7 +4,7 @@
 #include "Simulation.h"
 #include "parseCmdLine.h"
 #include "callback.h"
-#include "BarGraph.h"
+#include "Draw.h"
 
 using namespace std;
 
@@ -195,14 +195,17 @@ int main(int argc, char *argv[])
 
 					for(int a = 0; a < 1000; ++a)
 					{
-						Simulation framework(i, information.row, information.col, NULL, NULL, NULL, information.col * 10, information.row * 10);
+						Simulation framework(i, information.row, information.col, NULL, NULL, NULL, information.col * 1000, information.row * 1000);
 						ticksSum += framework.run();
 					}
 					ticksMedio[i] = ticksSum / 1000.0;		//Asigna el promedio de ticks para las 1000 simulaciones
-
+					
 					drawBar(DISPLAYW, DISPLAYH, ticksMedio[i], i, ticksMedio[1]);
 					
 				}
+				drawSuccess(0, font);
+				al_flip_display();
+
 			}
 		}
 //Hasta acá llega la parte importante del main
@@ -295,5 +298,6 @@ void help(void)
 	printf("-COLUMNS: cantidad de columnas.\n");
 	printf("-ROWS: cantidad de filas.\n");
 	printf("-BOTS: cantidad de robots. En caso de elegir modo 2, este valor no sera tenido en cuenta.\n");
-	printf("-STEP: \n");
+	printf("-NOAUDIO: indica si se quiere escuchar el audio del programa. Por defecto viene  desactivado, para activarlo solo ahce falta mandarle el argumento sin ningun valor\n");
+	printf("-STEP:Indica si se quiere correr el programa en el modo Step-by-Step, donde debera presionar la tecla 'enter'para avanzar un tick. Este argumento es opcional y por defecto viene desactivado. Para activarlo se debera enviar el valor '1' y para desactivarlo el valor'0' \n");
 }
