@@ -20,7 +20,6 @@ using namespace std;
 bool resourcesLoaded(bool * array, int size);
 void loadArray(double * arr, int size, double value);
 void waitForKey(char a);
-void help (void);
 
 int main(int argc, char *argv[])
 {
@@ -38,6 +37,7 @@ int main(int argc, char *argv[])
 #endif
 #ifdef AUDIO_C
 	ALLEGRO_SAMPLE * song = NULL;
+	bool audio = true;
 #endif
 	usrInput information;
 	
@@ -150,11 +150,6 @@ int main(int argc, char *argv[])
 			break;
 		case ERRORTYPE3:
 			break;
-		case HELP:
-		{
-			help();					//Comentado hasta que la funcion esté
-			break;
-		}
 		default:
 			if (information.mode == MODEONE)
 			{/*
