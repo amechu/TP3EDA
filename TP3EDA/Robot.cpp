@@ -4,21 +4,19 @@
 
 Robot::Robot()
 {
-	//this->x = rand() % (int)(al_get_display_width(al_get_current_display()));
-	//this->y = rand() % (int)(al_get_display_height(al_get_current_display()));
 	this->updateDirection();
-
 }
 
  
 Robot::~Robot()
 {
-	al_destroy_bitmap(this->bitmap);
+	if(this->bitmap)
+		al_destroy_bitmap(this->bitmap);
 }
 
 bool Robot::loadExternalInfo(const char * pathBitmap,float radius_, double displayH_, double displayW_)
 {
-	bool retValue;
+	bool retValue = true;
 
 	this->radius = radius_;
 
@@ -26,13 +24,15 @@ bool Robot::loadExternalInfo(const char * pathBitmap,float radius_, double displ
 	this->y = this->radius + (rand() % (int)(displayH_ - 2 * this->radius));
 
 
+	if (pathBitmap)
+	{
+		if (this->bitmap = al_load_bitmap(pathBitmap))
+			retValue = true;
+		else
+			retValue = false;
+	}
 
-	if (this->bitmap = al_load_bitmap(pathBitmap))
-		retValue = true;
-	else
-		retValue = false;
-
-		return retValue;
+	return retValue;
 }
 
 float Robot::getRadius()

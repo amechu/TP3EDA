@@ -9,7 +9,7 @@
 using namespace std;
 
 
-#define MAXROBOTS (500)
+#define MAXROBOTS (30)
 #define DIRTYTILEBITMAP "DirtyTile.png"
 #define CLEANTILEBITMAP "CleanTile.png"
 #define ROBOTBITMAP "captainShield.png"
@@ -195,7 +195,7 @@ int main(int argc, char *argv[])
 
 					for(int a = 0; a < 1000; ++a)
 					{
-						Simulation framework(i, information.row, information.col, DIRTYTILEBITMAP, CLEANTILEBITMAP, ROBOTBITMAP, information.col * 10, information.row * 10);
+						Simulation framework(i, information.row, information.col, NULL, NULL, NULL, information.col * 10, information.row * 10);
 						ticksSum += framework.run();
 					}
 					ticksMedio[i] = ticksSum / 1000.0;		//Asigna el promedio de ticks para las 1000 simulaciones

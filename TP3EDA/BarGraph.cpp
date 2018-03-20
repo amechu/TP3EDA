@@ -6,8 +6,8 @@
 #define BANNERTEXTCOLOR "white"
 #define SUCCESSTEXTCOLOR "white"
 
-#define WIDTHNEWSIZE 1000		
-#define HEIGHTNEWSIZE 500
+#define WIDTHNEWSIZE 2000		
+#define HEIGHTNEWSIZE 1500
 #define ORIGINX 30.0
 #define ORIGINY HEIGHTNEWSIZE - 30.0
 #define FINALY 30.0
@@ -15,9 +15,9 @@
 #define AXISXNAME "Number of robots"
 #define AXISYNAME "Ticks"
 
-#define SCALEBAR (0.5)
-#define SEPARATION (WIDTHNEWSIZE/25.0)
-#define BARTHICKNESS (WIDTHNEWSIZE/50.0)
+#define SCALEBAR 2//(0.5)
+#define SEPARATION (WIDTHNEWSIZE/40.0)
+#define BARTHICKNESS (WIDTHNEWSIZE/70.0)
 
 #define FONTPATH "mont.ttf"
 #define FONTSIZE 10
