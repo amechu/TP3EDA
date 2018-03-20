@@ -1,7 +1,6 @@
 #include <allegro5\allegro.h>
 #include <allegro5\allegro_color.h>
 #include <stdio.h>
-#include <string>
 
 // Important compiling stuff
 

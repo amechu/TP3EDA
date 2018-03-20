@@ -20,9 +20,6 @@ using namespace std;
 bool resourcesLoaded(bool * array, int size);
 void loadArray(double * arr, int size, double value);
 void waitForKey(char a);
-void drawSuccess(int ticks, ALLEGRO_FONT* font);
-void drawBanner(ALLEGRO_FONT * font, int ticks, float top, const char * bannerColor, int bots);
-
 
 int main(int argc, char *argv[])
 {
@@ -92,7 +89,7 @@ int main(int argc, char *argv[])
 		if (al_init_ttf_addon())
 		{
 			initResources[TTFADDON] = true;
-			if (font = al_load_ttf_font(FONTPATH, -FONTSIZE, 0)) // Si pones el tama;o de la fuente negativo, entonces la toma como pixeles en vez de una cosa rar
+			if (font = al_load_ttf_font(FONTPATH, -FONTSIZE, 0)) // Si pones el tamaño de la fuente negativo, entonces la toma como pixeles 
 				initResources[LASTI + FONT] = true;
 		}
 #else
@@ -154,7 +151,7 @@ int main(int argc, char *argv[])
 			break;
 		case HELP:
 		{
-			help();
+//			help();					//Comentado hasta que la funcion esté
 			break;
 		}
 		default:
@@ -200,22 +197,17 @@ int main(int argc, char *argv[])
 						Simulation framework(i, information.row, information.col, DIRTYTILEBITMAP, CLEANTILEBITMAP, ROBOTBITMAP, information.col * 10, information.row * 10);
 						ticksSum += framework.run();
 					}
-					ticksMedio[i] = ticksSum / 1000.0;
+					ticksMedio[i] = ticksSum / 1000.0;		//Asigna el promedio de ticks para las 1000 simulaciones
 
 					DrawBarsGraphic(ticksMedio);
 				}
 			}
 		}
-// Aca termina la parte importante del main
-
-
+//Hasta acá llega la parte importante del main
 	}
 	else
 		fprintf(stderr, "Resources were not loaded properly\n Shutting down\n");
 		
-
-
-
 
 #ifdef AUDIO_C
 	al_stop_samples();
@@ -282,45 +274,6 @@ void waitForKey(char a)
 		al_rest(0.1);
 		al_get_keyboard_state(&keystate);
 	} while (!(al_key_down(&keystate, ALLEGRO_KEY_ENTER)));
-}
-
-void drawSuccess(int ticks, ALLEGRO_FONT* font )
-{
-	 string text = "Success! The amount of ticks spent are: " + to_string(ticks);
-	 string getOut = "Please press 'enter' to leave";
-
-	 ALLEGRO_DISPLAY * display = al_get_current_display();
-	 float displayH = al_get_display_height(display);
-	 float displayW = al_get_display_width(display);
-
-	 float fontSize = al_get_font_line_height(font);
-
-	 float firstLineY = ((displayH / 2) - (3 * fontSize / 5)) - fontSize;
-	 float secondLineY = firstLineY + 2 * fontSize;
-	 float lineX = (displayW / 2);
-
-	al_draw_filled_rectangle((displayW / 5), (2 * displayH / 5), (4 * displayW / 5), (3 * displayH / 5), al_color_name("black"));
-	al_draw_text(font, al_color_name("white"), lineX, firstLineY, ALLEGRO_ALIGN_CENTRE, text.c_str());
-	al_draw_text(font, al_color_name("white"), lineX, secondLineY, ALLEGRO_ALIGN_CENTRE, getOut.c_str());
-	
-}
-
-
-void drawBanner(ALLEGRO_FONT * font, int ticks, float top, const char * bannerColor, int bots)
-{
-	string tixt, robotCountString;
-	ALLEGRO_DISPLAY * display = al_get_current_display();
-	float height = al_get_display_height(display);
-	float width = al_get_display_width(display);
-	float bannerHeight = height - top;
-
-	al_draw_filled_rectangle(0, top,width ,height, al_color_name(bannerColor));
-
-	tixt = "Current tick: " + to_string(ticks);
-	robotCountString = "Ammount of robots: " + to_string(bots);
-
-	al_draw_text(font, al_color_name("white"), width / 4.0, top + bannerHeight / 2.8, ALLEGRO_ALIGN_CENTRE, tixt.c_str());
-	al_draw_text(font, al_color_name("white"), width * 3 / 4.0, top + bannerHeight / 2.8, ALLEGRO_ALIGN_CENTRE, robotCountString.c_str());
 }
 
 
