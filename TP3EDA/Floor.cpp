@@ -9,21 +9,16 @@ Floor::Floor(int row_, int col_, const char * pathCleanBitmap, const char * path
 	this->tiles =  new bool[row_ * col_];
 	this->unitX = unitX_;
 	this->unitY = unitY_;
-	if (pathCleanBitmap)
-		this->cleanBitmap = al_load_bitmap(pathCleanBitmap);  // Hay que ponerlo lindo
-	if (pathDirtyBitmap)
-		this->dirtyBitmap = al_load_bitmap(pathDirtyBitmap);  // Hay que ponerlo lindo
+	this->cleanBitmap = al_load_bitmap(pathCleanBitmap);  // Hay que ponerlo lindo
+	this->dirtyBitmap = al_load_bitmap(pathDirtyBitmap);  // Hay que ponerlo lindo
 }
 
 
 Floor::~Floor()
 {
 	 delete[] this->tiles;
-
-	 if(this->cleanBitmap)
-		al_destroy_bitmap(this->cleanBitmap);
-	 if(this->dirtyBitmap)
-		al_destroy_bitmap(this->dirtyBitmap);
+	al_destroy_bitmap(this->cleanBitmap);
+	al_destroy_bitmap(this->dirtyBitmap);
 }
 
 void Floor::cleanAll()

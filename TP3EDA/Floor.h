@@ -34,7 +34,7 @@ private:
 	bool * tiles;
 	float unitX;
 	float unitY;
-	ALLEGRO_BITMAP * cleanBitmap = NULL;
-	ALLEGRO_BITMAP * dirtyBitmap = NULL;
+	ALLEGRO_BITMAP * cleanBitmap;
+	ALLEGRO_BITMAP * dirtyBitmap;
 };
 
