@@ -2,7 +2,6 @@
 
 #define BARCOLOR "red"
 #define AXISCOLOR "white"
-#define WIDTHNEWSIZE 1000
 #define TICKSCOLOR "white"
 
 #define WIDTHNEWSIZE 1000		
