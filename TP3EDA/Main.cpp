@@ -144,20 +144,17 @@ int main(int argc, char *argv[])
 // Aca empieza la parte importante del main
 		switch (parseCmdLine(argc, argv, &fillInformation, &information))
 		{
-		case ERRORTYPE1:
+		case ERRORTYPE1:help();
 			break;
-		case ERRORTYPE2:
+		case ERRORTYPE2:help();
 			break;
-		case ERRORTYPE3:
+		case ERRORTYPE3:help();
 			break;
-		case HELP:
-		{
-			help();					//Comentado hasta que la funcion esté
-			break;
-		}
 		default:
+			if (information.noaudio)
+				al_stop_samples();
 			if (information.mode == MODEONE)
-			{/*
+			{
 				int ticks = 0;				
 				Simulation framework(information.bots, information.row, information.col, (char *) DIRTYTILEBITMAP, (char *)CLEANTILEBITMAP, (char *)ROBOTBITMAP,DISPLAYW,DISPLAYH - BANNERHEIGHT);
 				// Este while loop es el modo 1. La funcion cycle realiza un ciclo de la simulacion, si sigue habiendo baldosas sucias, va a devolver 'false'
@@ -179,7 +176,6 @@ int main(int argc, char *argv[])
 				drawSuccess(ticks, font);
 				al_flip_display();
 				waitForKey('\n');
-				*/
 			}
 			else if (information.mode == MODETWO)
 			{
