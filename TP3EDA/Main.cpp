@@ -9,7 +9,7 @@
 using namespace std;
 
 
-#define MAXROBOTS (500)
+#define MAXROBOTS (100)
 #define DIRTYTILEBITMAP "DirtyTile.png"
 #define CLEANTILEBITMAP "CleanTile.png"
 #define ROBOTBITMAP "captainShield.png"
@@ -184,15 +184,15 @@ int main(int argc, char *argv[])
 			else if (information.mode == MODETWO)
 			{
 				double ticksSum;
-				double ticksMedio[MAXROBOTS];
-				loadArray(ticksMedio, MAXROBOTS, 9999999999999.0);
+				double ticksMedio[MAXROBOTS+2];
+				loadArray(ticksMedio, MAXROBOTS + 2, TERMINATOR);
 				drawAxis(DISPLAYW, DISPLAYH);
 
 				// Este es el modo 2, donde se ejecuta la simulacion sin parte grafica de forma que por cada cantidad de robots se ejecutan 1000 simulaciones 
 				// y se realiza un promedio de la cantidad de la cantidad de ticks que tardan cada una. Esto nos va a permitir hacer un grafico de barras al final
 				// y se va a poder ver que cantidad de robots es ideal para limpiar el piso
 				
-				for(int i = 1;  (i<MAXROBOTS) && (i == 1 ? true : (ticksMedio[i] - ticksMedio[i - 1] >0.1)); ++i)
+				for(int i = 1;  (i<MAXROBOTS) && (i <= 3 ? true : ((ticksMedio[i-2] - ticksMedio[i - 1]) >0.1)); ++i)
 				{
 					ticksSum = 0.0;
 
@@ -203,7 +203,7 @@ int main(int argc, char *argv[])
 					}
 					ticksMedio[i] = ticksSum / 1000.0;		//Asigna el promedio de ticks para las 1000 simulaciones
 
-					drawBar(DISPLAYW, DISPLAYH, ticksSum/1000.0, i);
+					drawBar(DISPLAYW, DISPLAYH, ticksMedio[i], i, ticksMedio[1]);
 					
 				}
 			}

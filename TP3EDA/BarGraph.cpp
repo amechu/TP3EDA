@@ -196,7 +196,7 @@ void drawAxis(const int scrW, const int scrH)
 	al_flip_display();
 }
 
-void drawBar(const int scrW, const int scrH, const double average, const int barPos)
+void drawBar(const int scrW, const int scrH, const double average, const int barPos, double firstValue)
 {
 	ALLEGRO_DISPLAY* display = al_get_current_display();
 	ALLEGRO_FONT * font = NULL;
@@ -204,27 +204,26 @@ void drawBar(const int scrW, const int scrH, const double average, const int bar
 
 	std::string tixt = std::to_string((int)average);
 
-	static float heightOffset;
-
+	
 	//Cool math stuff
-	const int barOffset = 40;
+	const int barOffsetX = 40;
+	const int barOffsetY = 100;
 	const int yAxisSeparationFromFloor = 50;
 	const int separation = 10;
-	const int xAxis = scrW - barOffset;
-	const int yAxis = scrH - barOffset;
-	const int barTotal = 30;
+	const int xAxis = scrW - barOffsetX;
+	const int yAxis = scrH - barOffsetY;
+	const int barTotal = 40;
 	const int usedPixelsBySeparation = (barTotal * separation) + separation;
 	const int barWidth = (xAxis - usedPixelsBySeparation) / barTotal;
 	const int tallestBar = yAxis;
 
-	if (barPos == 1)
-		heightOffset = average - tallestBar;
+	double multiplier = yAxis / firstValue;
 
-	const int currentBarXPosition = (barOffset + (separation*barPos) + (barWidth*(barPos - 1)));
-	const int currentBarYPosition = (scrH - yAxisSeparationFromFloor - average + heightOffset + 60);
+	const int currentBarXPosition = (barOffsetX + (separation*barPos) + (barWidth*(barPos - 1)));
+	const int currentBarYPosition = (scrH - yAxisSeparationFromFloor - average );
 
-	al_draw_filled_rectangle(currentBarXPosition, currentBarYPosition, currentBarXPosition + barWidth, scrH-yAxisSeparationFromFloor, al_color_name("red"));
-	al_draw_text(font, al_color_name("black"), currentBarXPosition + (barWidth / 2), currentBarYPosition - 20, ALLEGRO_ALIGN_CENTRE, tixt.c_str());
+	al_draw_filled_rectangle(currentBarXPosition, (barPos == 1 ? scrH - yAxisSeparationFromFloor -yAxis : scrH -average *multiplier - yAxisSeparationFromFloor) , currentBarXPosition + barWidth, scrH-yAxisSeparationFromFloor, al_color_name("red"));
+	al_draw_text(font, al_color_name("black"), currentBarXPosition + (barWidth / 2), (barPos == 1 ? scrH - yAxisSeparationFromFloor - yAxis : scrH - average * multiplier - yAxisSeparationFromFloor) - 20, ALLEGRO_ALIGN_CENTRE, tixt.c_str());
 	al_flip_display();
 
 }

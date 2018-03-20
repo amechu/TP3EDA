@@ -26,8 +26,10 @@ void drawBanner(ALLEGRO_FONT * font, int ticks, float top, const char * bannerCo
 
 */
 
+#define TERMINATOR 9999999999999.0
+
 void drawAxis(const int scrW, const int scrH);
-void drawBar(const int scrW, const int scrH, double average, int barPos);
+void drawBar(const int scrW, const int scrH, double average, int barPos, double firstValue);
 
 //
 //
