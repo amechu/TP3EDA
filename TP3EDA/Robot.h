@@ -34,6 +34,6 @@ private:
 	float x;
 	float y;
 	float angle;
-	ALLEGRO_BITMAP * bitmap;
+	ALLEGRO_BITMAP * bitmap = NULL;
 };
 
